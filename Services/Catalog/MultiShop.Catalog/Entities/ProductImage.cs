@@ -2,11 +2,13 @@
 
 namespace MultiShop.Catalog.Entities
 {
-    public class Category
+    public class ProductImage
     {
         [BsonId]
         [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
         public string Id { get; set; }
-        public string Name { get; set; }
+        public string ImageDetailUrl { get; set; }
+        public string ProductId { get; set; }
+        public Product Product { get; set; }
     }
 }
