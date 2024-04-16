@@ -19,13 +19,13 @@ namespace MultiShop.Catalog.Services.ProductServices
 
         public async Task<List<ResultProductDto>> GetAllAsync()
         {
-            var products = await _context.Products.FindAsync(x => true);
+            var products = await _context.Products.Find(x => true).ToListAsync();
             return _mapper.Map<List<ResultProductDto>>(products);
         }
 
         public async Task<GetByIdProductDto> GetByIdProductAsync(string productId)
         {
-            var product = await _context.Products.FindAsync(x => x.Id == productId);
+            var product = await _context.Products.Find(x => x.Id == productId).FirstOrDefaultAsync();
             return _mapper.Map<GetByIdProductDto>(product);
         }
 

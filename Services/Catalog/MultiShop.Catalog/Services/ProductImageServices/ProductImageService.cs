@@ -18,7 +18,7 @@ namespace MultiShop.Catalog.Services.ProductImageServices
         }
         public async Task<List<ResultProductImageDto>> GetAllAsync()
         {
-            var productImages = await _context.ProductImages.FindAsync(x => true);
+            var productImages = await _context.ProductImages.Find(x => true).ToListAsync();
             return _mapper.Map<List<ResultProductImageDto>>(productImages);
         }
 

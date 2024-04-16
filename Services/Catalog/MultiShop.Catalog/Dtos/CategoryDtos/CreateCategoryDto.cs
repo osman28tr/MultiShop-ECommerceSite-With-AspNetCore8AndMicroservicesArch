@@ -1,4 +1,6 @@
-﻿namespace MultiShop.Catalog.Dtos.CategoryDtos
+﻿using MongoDB.Bson.Serialization.Attributes;
+
+namespace MultiShop.Catalog.Dtos.CategoryDtos
 {
     public class CreateCategoryDto
     {

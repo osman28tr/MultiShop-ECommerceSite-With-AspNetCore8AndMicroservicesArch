@@ -11,13 +11,14 @@ namespace MultiShop.Catalog.Services.CategoryServices
     {
         private readonly MultiShopCatalogContext _context;
         private readonly IMapper _mapper;
-        public CategoryService(MultiShopCatalogContext context)
+        public CategoryService(MultiShopCatalogContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
         public async Task AddAsync(CreateCategoryDto createCategoryDto)
         {
-            var categoryDto = _mapper.Map<Category>(createCategoryDto);
+            var categoryDto = new Category() { Name = createCategoryDto.Name };
             await _context.Categories.InsertOneAsync(categoryDto);
         }
 
@@ -27,7 +28,7 @@ namespace MultiShop.Catalog.Services.CategoryServices
         }
         public async Task<List<ResultCategoryDto>> GetAllAsync()
         {
-            var categories = await _context.Categories.FindAsync(x => true);
+            var categories = await _context.Categories.Find(x => true).ToListAsync();
             return _mapper.Map<List<ResultCategoryDto>>(categories);
         }
 
@@ -40,7 +41,7 @@ namespace MultiShop.Catalog.Services.CategoryServices
         public async Task UpdateAsync(UpdateCategoryDto updateCategoryDto)
         {
             var category = _mapper.Map<Category>(updateCategoryDto);
-            await _context.Categories.ReplaceOneAsync(x => x.Id == category.Id, category);
+            await _context.Categories.ReplaceOneAsync(x => x.Id == updateCategoryDto.Id, category);
         }
     }
 }

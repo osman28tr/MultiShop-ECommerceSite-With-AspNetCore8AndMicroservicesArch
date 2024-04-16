@@ -18,7 +18,7 @@ namespace MultiShop.Catalog.Services.ProductDetailServices
         }
         public async Task<List<ResultProductDetailDto>> GetAllAsync()
         {
-            var productDetails = await _context.ProductDetails.FindAsync(x => true);
+            var productDetails = await _context.ProductDetails.Find(x => true).ToListAsync();
             return _mapper.Map<List<ResultProductDetailDto>>(productDetails);
         }
 
