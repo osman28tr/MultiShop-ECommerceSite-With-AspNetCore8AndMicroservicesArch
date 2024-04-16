@@ -9,6 +9,7 @@ namespace MultiShop.Catalog.Mappings.CategoryMapping
         public MappingProfile()
         {
             CreateMap<Category, ResultCategoryDto>().ReverseMap();
+            CreateMap<Category, GetByIdCategoryDto>().ReverseMap();
             CreateMap<Category, CreateCategoryDto>().ReverseMap();
             CreateMap<Category, UpdateCategoryDto>().ReverseMap();
         }

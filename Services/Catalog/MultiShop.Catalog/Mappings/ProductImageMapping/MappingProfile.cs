@@ -9,6 +9,7 @@ namespace MultiShop.Catalog.Mappings.ProductImageMapping
         public MappingProfile()
         {
             CreateMap<ProductImage, ResultProductImageDto>().ReverseMap();
+            CreateMap<ProductImage, GetByIdProductImageDto>().ReverseMap();
             CreateMap<ProductImage, CreateProductImageDto>().ReverseMap();
             CreateMap<ProductImage, UpdateProductImageDto>().ReverseMap();
         }
