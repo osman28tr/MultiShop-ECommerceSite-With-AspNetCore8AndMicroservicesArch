@@ -15,13 +15,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddScoped<MultiShopCatalogContext>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductDetailService, ProductDetailService>();
 builder.Services.AddScoped<IProductImageService, ProductImageService>();
-
-builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 builder.Services.Configure<DatabaseSetting>(builder.Configuration.GetSection("DatabaseSettings"));
 builder.Services.AddScoped<IDatabaseSetting>(sp =>
@@ -31,12 +30,6 @@ builder.Services.AddScoped<IDatabaseSetting>(sp =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddAutoMapper(typeof(Program));
-
-var databaseOption = builder.Configuration.GetSection("DatabaseSettings");
-builder.Services.Configure<IDatabaseSetting>(databaseOption);
-
-builder.Services.AddSingleton<MultiShopCatalogContext>();
 
 var app = builder.Build();
 
