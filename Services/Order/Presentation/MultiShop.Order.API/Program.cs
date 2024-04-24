@@ -1,8 +1,26 @@
+using MultiShop.Order.Application.Features.CQRS.Handlers.CommandHandlers.AddressCommandHandlers;
+using MultiShop.Order.Application.Features.CQRS.Handlers.CommandHandlers.OrderDetailCommandHandlers;
+using MultiShop.Order.Application.Features.CQRS.Handlers.QueryHandlers.AddressQueryHandlers;
+using MultiShop.Order.Application.Features.CQRS.Handlers.QueryHandlers.OrderDetailQueryHandlers;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<GetAddressByIdQueryHandler>();
+builder.Services.AddScoped<GetListAddressQueryHandler>();
+builder.Services.AddScoped<CreateAddressCommandHandler>();
+builder.Services.AddScoped<UpdateAddressCommandHandler>();
+builder.Services.AddScoped<DeleteAddressCommandHandler>();
+
+builder.Services.AddScoped<GetListOrderDetailQueryHandler>();
+builder.Services.AddScoped<GetOrderDetailByIdQueryHandler>();
+builder.Services.AddScoped<CreateOrderDetailCommandHandler>();
+builder.Services.AddScoped<UpdateOrderDetailCommandHandler>();
+builder.Services.AddScoped<DeleteOrderDetailCommandHandler>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
