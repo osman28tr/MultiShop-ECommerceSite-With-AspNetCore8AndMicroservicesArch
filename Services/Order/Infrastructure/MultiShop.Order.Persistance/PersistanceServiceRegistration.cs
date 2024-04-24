@@ -13,6 +13,7 @@ namespace MultiShop.Order.Persistance
     {
         public static IServiceCollection AddPersistanceServices(this IServiceCollection services)
         {
+            services.AddScoped(typeof(IRepository<>),typeof(GenericRepository<>));
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
             services.AddScoped<IAddressRepository, AddressRepository>();
