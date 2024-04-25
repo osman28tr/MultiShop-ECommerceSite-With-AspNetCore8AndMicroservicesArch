@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+ multishop.orderdb:
+  environment:
+    - ACCEPT_EULA=N
+    - MSSQL_SA_PASSWORD=123456aA*
+  volumes:
+    - sqlserver_orderdb_volume:/var/opt/mssql
+  ports:
+      - "1434:1433"
+ multishop.identitydb:
+  environment:
+        - ACCEPT_EULA=N
+        - MSSQL_SA_PASSWORD=123456aA*
+  volumes:
+        - sqlserver_identitydb_volume:/var/opt/mssql
+  ports:
+        - "1433:1433"

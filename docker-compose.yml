@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  multishop.orderdb:
+    container_name: multishop.orderdb-container
+    image: mcr.microsoft.com/mssql/server:latest
+  multishop.identitydb:
+    container_name: multishop.identitydb-container
+    image: mcr.microsoft.com/mssql/server:latest
+volumes:
+  sqlserver_orderdb_volume:
+  sqlserver_identitydb_volume:

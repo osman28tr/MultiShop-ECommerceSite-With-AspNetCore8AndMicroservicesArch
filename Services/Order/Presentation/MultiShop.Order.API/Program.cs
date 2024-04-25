@@ -12,6 +12,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddDbContext<MultiShopOrderContext>(opt =>
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("MSSQL")));
 #region CQRSNotMediator
 builder.Services.AddScoped<GetAddressByIdQueryHandler>();
 builder.Services.AddScoped<GetListAddressQueryHandler>();
