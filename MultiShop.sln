@@ -31,6 +31,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiShop.Order.API", "Serv
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{4772E39E-1799-4C3A-B418-C8C81FAF5FB8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityServer", "IdentityServer", "{F422D67F-4EA2-4CFB-B4D8-EB3941722E83}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiShop.IdentityServer", "IdentityServer\MultiShop.IdentityServer\MultiShop.IdentityServer.csproj", "{5BD744C2-8014-4C8B-8CD3-F9ADA91976C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +69,10 @@ Global
 		{4772E39E-1799-4C3A-B418-C8C81FAF5FB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4772E39E-1799-4C3A-B418-C8C81FAF5FB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4772E39E-1799-4C3A-B418-C8C81FAF5FB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BD744C2-8014-4C8B-8CD3-F9ADA91976C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BD744C2-8014-4C8B-8CD3-F9ADA91976C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BD744C2-8014-4C8B-8CD3-F9ADA91976C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BD744C2-8014-4C8B-8CD3-F9ADA91976C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,6 +90,7 @@ Global
 		{D47B8065-006E-4828-90D9-18C5F64688E1} = {76340A81-B410-46B7-B9B3-F19B8B6905A4}
 		{F8739BBA-A2CD-4677-B785-4637E1019300} = {4285C1CA-5461-4474-8F4F-52263BEBF572}
 		{F0841C82-24DE-404A-B96A-1CBB472F7415} = {162DBD5E-080B-4B54-B3D3-3251AB341B6D}
+		{5BD744C2-8014-4C8B-8CD3-F9ADA91976C6} = {F422D67F-4EA2-4CFB-B4D8-EB3941722E83}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F7049DB-1BC6-48BF-8D4B-0F2B540466AE}
