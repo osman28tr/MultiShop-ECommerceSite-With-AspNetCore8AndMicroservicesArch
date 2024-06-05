@@ -14,9 +14,10 @@ namespace MultiShop.IdentityServer
         {
             new ApiResource("MultiShopCatalog") { Scopes = { "CatalogFullPermission", "CatalogReadPermission" } },
             new ApiResource("MultiShopDiscount"){Scopes = {"DiscountFullPermission","DiscountReadPermission"}},
-            new ApiResource("MultiShopOrder"){Scopes = {"OrderFullPermission"}}
+            new ApiResource("MultiShopOrder"){Scopes = {"OrderFullPermission"}},
+            new ApiResource(IdentityServerConstants.LocalApi.ScopeName) // Diğer mikroservisler dışında bir de identity için de kapsam oluşturuyoruz yani identity'e erişim yetkisi veriyoruz.
         };
-
+         
         public static IEnumerable<IdentityResource> IdentityResources = new IdentityResource[]
             { new IdentityResources.OpenId(), new IdentityResources.Email(), new IdentityResources.Profile() };
 
@@ -44,7 +45,7 @@ namespace MultiShop.IdentityServer
             {
                 ClientId = "MultiShopManagerId",
                 ClientName = "MultiShopManager",
-                AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                AllowedGrantTypes = GrantTypes.ClientCredentials,
                 ClientSecrets = {new Secret("multishopsecret".Sha256())},
                 AllowedScopes = { "CatalogFullPermission" }
             },
@@ -52,7 +53,7 @@ namespace MultiShop.IdentityServer
             {
                 ClientId = "MultiShopAdminId",
                 ClientName = "MultiShopAdmin",
-                AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                AllowedGrantTypes = GrantTypes.ClientCredentials,
                 ClientSecrets = {new Secret("multishopsecret".Sha256())},
                 AllowedScopes =
                 {

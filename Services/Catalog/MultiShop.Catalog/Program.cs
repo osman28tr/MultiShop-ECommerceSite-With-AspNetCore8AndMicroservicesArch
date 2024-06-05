@@ -1,4 +1,5 @@
 using System.Reflection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using MultiShop.Catalog.Contexts;
 using MultiShop.Catalog.Services.CategoryServices;
@@ -14,6 +15,13 @@ using MultiShop.Catalog.Settings;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+{
+    opt.Authority = builder.Configuration["IdentityServerUrl"];
+    opt.Audience = "MultiShopCatalog";
+    opt.RequireHttpsMetadata = false;
+});
+
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddScoped<MultiShopCatalogContext>();
@@ -40,6 +48,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
