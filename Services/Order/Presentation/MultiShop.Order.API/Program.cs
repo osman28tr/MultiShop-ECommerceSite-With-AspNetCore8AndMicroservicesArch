@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using MultiShop.Order.Application;
 using MultiShop.Order.Application.Features.CQRS.Handlers.CommandHandlers.AddressCommandHandlers;
@@ -10,7 +11,12 @@ using MultiShop.Order.Persistance.Contexts;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+{
+    opt.Authority = builder.Configuration["IdentityServerUrl"];
+    opt.Audience = "MultiShopOrder";
+    opt.RequireHttpsMetadata = false;
+});
 builder.Services.AddControllers();
 builder.Services.AddDbContext<MultiShopOrderContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("MSSQL")));
@@ -44,6 +50,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

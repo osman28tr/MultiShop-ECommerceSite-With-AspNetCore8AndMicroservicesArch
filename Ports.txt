@@ -1,4 +1,5 @@
 Services
 	-catalogAPI=> 5250
 	-discountAPI=>5251
+	-orderAPI=>5252
 identityserver=>5001
