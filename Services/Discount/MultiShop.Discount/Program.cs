@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using MultiShop.Discount.Contexts.Dapper;
 using MultiShop.Discount.Contexts.EntityFramework;
@@ -7,7 +8,12 @@ using MultiShop.Discount.Services.Abstract;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+{
+    opt.Authority = builder.Configuration["IdentityServerUrl"];
+    opt.Audience = "MultiShopDiscount";
+    opt.RequireHttpsMetadata = false;
+});
 builder.Services.AddControllers();
 builder.Services.AddDbContext<MultiShopDiscountContext>(options =>
 {
@@ -28,6 +34,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
