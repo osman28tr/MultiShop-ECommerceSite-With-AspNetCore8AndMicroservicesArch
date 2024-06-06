@@ -1,8 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using MultiShop.Cargo.DataAccessLayer.Concrete;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddDbContext<CargoContext>(opt =>
+{
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("MSSQL"));
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

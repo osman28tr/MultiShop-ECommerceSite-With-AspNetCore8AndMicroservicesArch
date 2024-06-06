@@ -7,6 +7,10 @@ services:
   multishop.identitydb:
     container_name: multishop.identitydb-container
     image: mcr.microsoft.com/mssql/server:latest
+  multishop.cargodb:
+    container_name: multishop.cargodb-container
+    image: mcr.microsoft.com/mssql/server:latest
 volumes:
   sqlserver_orderdb_volume:
   sqlserver_identitydb_volume:
+  sqlserver_cargodb_volume:

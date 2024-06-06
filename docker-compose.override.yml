@@ -17,3 +17,11 @@ services:
         - sqlserver_identitydb_volume:/var/opt/mssql
   ports:
         - "1433:1433"
+ multishop.cargodb:
+  environment:
+        - ACCEPT_EULA=N
+        - MSSQL_SA_PASSWORD=123456aA*
+  volumes:
+        - sqlserver_cargodb_volume:/var/opt/mssql
+  ports:
+        - "1435:1433"
