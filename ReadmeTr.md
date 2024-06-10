@@ -8,3 +8,6 @@
 <p align="justify">Asp.Net Core 8.0 API, Asp.Net Core 8.0 Mvc, Entityframework Core, MSSQL, MongoDb, Docker, DockerCompose, Automapper, Redis, IdentityServer, Generic Repository Design Pattern, CQRS Design Pattern, Mediator, Onion Architecture, Microservices Architecture</p>
 
 <h3>3. Kullanılan Dil ve Geliştirme Ortamı: C# - .Net 8.0</h3>
+
+<h3>4. Projede Kullanılan Mimarinin Genel Hatları</h3>
+<img src="Sources/Images/microservicearchitecture.PNG">
