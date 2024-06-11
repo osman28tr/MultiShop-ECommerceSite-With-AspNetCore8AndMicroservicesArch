@@ -10,4 +10,4 @@
 <h3>3. Kullanılan Dil ve Geliştirme Ortamı: C# - .Net 8.0</h3>
 
 <h3>4. Projede Kullanılan Mimarinin Genel Hatları</h3>
-<img src="Sources/Images/microservicearchitect.PNG">
+<img src="Sources/Images/microservicearc.PNG">
