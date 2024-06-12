@@ -25,3 +25,8 @@ services:
         - sqlserver_cargodb_volume:/var/opt/mssql
   ports:
         - "1435:1433"
+ multishop.basketdb:
+  volumes:
+      - redis_basketdb_volume:/data
+  ports:
+      - "6379:6379"
