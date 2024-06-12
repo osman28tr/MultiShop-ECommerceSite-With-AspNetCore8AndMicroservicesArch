@@ -15,7 +15,8 @@ namespace MultiShop.IdentityServer
             new ApiResource("MultiShopCatalog") { Scopes = { "CatalogFullPermission", "CatalogReadPermission" } },
             new ApiResource("MultiShopDiscount"){Scopes = {"DiscountFullPermission","DiscountReadPermission"}},
             new ApiResource("MultiShopOrder"){Scopes = {"OrderFullPermission"}},
-            new ApiResource(IdentityServerConstants.LocalApi.ScopeName) // Diğer mikroservisler dışında bir de identity için de kapsam oluşturuyoruz yani identity'e erişim yetkisi veriyoruz.
+            new ApiResource(IdentityServerConstants.LocalApi.ScopeName), // Diğer mikroservisler dışında bir de identity için de kapsam oluşturuyoruz yani identity'e erişim yetkisi veriyoruz.
+            new ApiResource("MultiShopCargo"){Scopes = {"CargoFullPermission","CargoReadPermission"}}
         };
          
         public static IEnumerable<IdentityResource> IdentityResources = new IdentityResource[]
@@ -28,6 +29,8 @@ namespace MultiShop.IdentityServer
             new ApiScope("DiscountFullPermission", "Full authority for discount operations"),
             new ApiScope("DiscountReadPermission", "Read authority for discount operations"),
             new ApiScope("OrderFullPermission", "Full authority for catalog operations"),
+            new ApiScope("CargoReadPermission", "Read authority for cargo operations"),
+            new ApiScope("CargoFullPermission","Full authority for cargo operations"),
             new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
         };
 
@@ -39,7 +42,7 @@ namespace MultiShop.IdentityServer
                 ClientName = "MultiShopMvc",
                 AllowedGrantTypes = GrantTypes.ClientCredentials,
                 ClientSecrets = {new Secret("multishopsecret".Sha256())},
-                AllowedScopes = { "CatalogReadPermission" }
+                AllowedScopes = { "CatalogReadPermission","CargoReadPermission" }
             },
             new Client()
             {
@@ -47,7 +50,7 @@ namespace MultiShop.IdentityServer
                 ClientName = "MultiShopManager",
                 AllowedGrantTypes = GrantTypes.ClientCredentials,
                 ClientSecrets = {new Secret("multishopsecret".Sha256())},
-                AllowedScopes = { "CatalogFullPermission" }
+                AllowedScopes = { "CatalogFullPermission","CargoReadPermission" }
             },
             new Client()
             {
@@ -57,7 +60,7 @@ namespace MultiShop.IdentityServer
                 ClientSecrets = {new Secret("multishopsecret".Sha256())},
                 AllowedScopes =
                 {
-                    "CatalogFullPermission", "DiscountFullPermission", "OrderFullPermission", IdentityServerConstants.LocalApi.ScopeName, IdentityServerConstants.StandardScopes.Email,IdentityServerConstants.StandardScopes.OpenId,IdentityServerConstants.StandardScopes.Profile
+                    "CatalogFullPermission", "DiscountFullPermission", "OrderFullPermission","CargoFullPermission", IdentityServerConstants.LocalApi.ScopeName, IdentityServerConstants.StandardScopes.Email,IdentityServerConstants.StandardScopes.OpenId,IdentityServerConstants.StandardScopes.Profile
                 },
                 AccessTokenLifetime = 600
             }
