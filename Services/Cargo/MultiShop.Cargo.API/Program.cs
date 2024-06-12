@@ -1,10 +1,13 @@
 using Microsoft.EntityFrameworkCore;
+using MultiShop.Cargo.BusinessLayer;
+using MultiShop.Cargo.DataAccessLayer;
 using MultiShop.Cargo.DataAccessLayer.Concrete;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddPersistenceServices();
+builder.Services.AddApplicationServices();
 builder.Services.AddControllers();
 builder.Services.AddDbContext<CargoContext>(opt =>
 {
