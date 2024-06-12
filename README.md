@@ -11,3 +11,5 @@
 
 <h3>4. General Outlines of the Architecture Used in the Project</h3>
 <img src="Sources/Images/microservicearch.PNG">
+
+<b>Note: </b>You can access the Turkish document of the project from the ReadmeTr file.
