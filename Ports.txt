@@ -3,5 +3,6 @@ Services
 	-discountAPI=>5251
 	-orderAPI=>5252
 	-cargoAPI=>5253
+	-basketAPI=>5254
 
 identityserver=>5001
