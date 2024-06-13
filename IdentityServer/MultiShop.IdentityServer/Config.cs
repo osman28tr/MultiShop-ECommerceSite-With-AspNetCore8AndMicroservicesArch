@@ -16,7 +16,8 @@ namespace MultiShop.IdentityServer
             new ApiResource("MultiShopDiscount"){Scopes = {"DiscountFullPermission","DiscountReadPermission"}},
             new ApiResource("MultiShopOrder"){Scopes = {"OrderFullPermission"}},
             new ApiResource(IdentityServerConstants.LocalApi.ScopeName), // Diğer mikroservisler dışında bir de identity için de kapsam oluşturuyoruz yani identity'e erişim yetkisi veriyoruz.
-            new ApiResource("MultiShopCargo"){Scopes = {"CargoFullPermission","CargoReadPermission"}}
+            new ApiResource("MultiShopCargo"){Scopes = {"CargoFullPermission","CargoReadPermission"}},
+            new ApiResource("MultiShopBasket"){Scopes = { "BasketFullPermission"}}
         };
          
         public static IEnumerable<IdentityResource> IdentityResources = new IdentityResource[]
@@ -31,6 +32,7 @@ namespace MultiShop.IdentityServer
             new ApiScope("OrderFullPermission", "Full authority for catalog operations"),
             new ApiScope("CargoReadPermission", "Read authority for cargo operations"),
             new ApiScope("CargoFullPermission","Full authority for cargo operations"),
+            new ApiScope("BasketFullPermission","Full authority for basket operations"),
             new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
         };
 
@@ -60,7 +62,7 @@ namespace MultiShop.IdentityServer
                 ClientSecrets = {new Secret("multishopsecret".Sha256())},
                 AllowedScopes =
                 {
-                    "CatalogFullPermission", "DiscountFullPermission", "OrderFullPermission","CargoFullPermission", IdentityServerConstants.LocalApi.ScopeName, IdentityServerConstants.StandardScopes.Email,IdentityServerConstants.StandardScopes.OpenId,IdentityServerConstants.StandardScopes.Profile
+                    "CatalogFullPermission", "DiscountFullPermission", "OrderFullPermission","CargoFullPermission","BasketFullPermission", IdentityServerConstants.LocalApi.ScopeName, IdentityServerConstants.StandardScopes.Email,IdentityServerConstants.StandardScopes.OpenId,IdentityServerConstants.StandardScopes.Profile
                 },
                 AccessTokenLifetime = 600
             }

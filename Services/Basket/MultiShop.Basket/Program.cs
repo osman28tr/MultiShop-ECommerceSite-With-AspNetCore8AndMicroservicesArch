@@ -1,6 +1,33 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Options;
+using MultiShop.Basket.LoginServices;
+using MultiShop.Basket.LoginServices.Abstract;
+using MultiShop.Basket.Services;
+using MultiShop.Basket.Services.Abstract;
+using MultiShop.Basket.Settings;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+{
+    opt.Authority = builder.Configuration["IdentityServerUrl"];
+    opt.Audience = "MultiShopBasket";
+    opt.RequireHttpsMetadata = false;
+});
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<IBasketService, BasketService>();
+builder.Services.Configure<RedisSetting>(builder.Configuration.GetSection("RedisSettings"));
+builder.Services.AddSingleton<RedisService>(sp =>
+{
+    var redisSettings = sp.GetRequiredService<IOptions<RedisSetting>>().Value;
+    var redis = new RedisService(redisSettings.Port, redisSettings.Host);
+    redis.Connect();
+    return redis;
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
