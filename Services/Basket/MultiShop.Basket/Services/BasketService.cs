@@ -19,7 +19,8 @@ namespace MultiShop.Basket.Services
             {
                 return null;
             }
-            return JsonSerializer.Deserialize<BasketDto>(existBasket);
+            var result = JsonSerializer.Deserialize<BasketDto>(existBasket);
+            return result;
         }
 
         public async Task AddAsync(BasketDto basketDto)

@@ -1,3 +1,4 @@
+using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -10,10 +11,12 @@ using MultiShop.Basket.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 var requireAuthorizePolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub"); //controller tarafýnda sub claim'ini alabilmek için bu satýrý ekliyoruz. normalde sub claim'i nameidentifier olarak geliyor. bu mapping'i kaldýrýyoruz.
 // Add services to the container.
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
 {
+    opt.MapInboundClaims = false;
     opt.Authority = builder.Configuration["IdentityServerUrl"];
     opt.Audience = "MultiShopBasket";
     opt.RequireHttpsMetadata = false;
