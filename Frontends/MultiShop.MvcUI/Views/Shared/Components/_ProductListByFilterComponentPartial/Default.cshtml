@@ -1,0 +1,11 @@
+﻿<div class="col-lg-3 col-md-4">
+    <!-- Price Start -->
+    @await Component.InvokeAsync("_ProductListByPriceFilterComponentPartial")
+    <!-- Price End -->
+    <!-- Color Start -->
+    @await Component.InvokeAsync("_ProductListByColorFilterComponentPartial")
+    <!-- Color End -->
+    <!-- Size Start -->
+    @await Component.InvokeAsync("_ProductListBySizeFilterComponentPartial")
+    <!-- Size End -->
+</div>
