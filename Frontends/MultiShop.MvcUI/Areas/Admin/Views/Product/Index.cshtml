@@ -1,11 +1,10 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
-@model List<ResultCategoryDto>
-@{
-    int count = 0;
-}
+@model List<ResultProductDto>
+@{ int count = 0;}
 <section class="content container-fluid">
     <div class="row">
         <div class="col-md-12">
@@ -17,32 +16,33 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Kategori Adı</th>
-                                @*<th>Ürünler</th>*@
+                            <th>Ürün Adı</th>
+                            <th>Ürün Fiyatı</th>
+                            @*<th>Ürünler</th>*@
                             <th>Sil</th>
                             <th>Güncelle</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach (var item in Model)
+                        @foreach (var product in Model)
                         {
                             count++;
                             <tr>
                                 <th scope="row">@count</th>
-                                <td>@item.Name</td>
-                                    @* <td><a href="#" class="btn btn-warning">Ürünler</a></td>*@
-                                <td><a href="/Admin/Category/Delete/@item.Id" class="btn btn-danger">Sil</a></td>
-                                    <td><a href="/Admin/Category/Update/@item.Id" class="btn btn-info">Güncelle</a></td>
+                                    <td>@product.Name</td>
+                                    <td>@product.Price</td>
+                                @* <td><a href="#" class="btn btn-warning">Ürünler</a></td>*@
+                                    <td><a href="/Admin/Product/Delete/@product.Id" class="btn btn-danger">Sil</a></td>
+                                    <td><a href="/Admin/Product/Update/@product.Id" class="btn btn-info">Güncelle</a></td>
                             </tr>
                         }
                         </tbody>
                     </table>
-                    <a href="/Admin/Category/Create/" class="btn btn-success">Kategori ekle</a>
+                    <a href="/Admin/Product/Create/" class="btn btn-success">Ürün ekle</a>
                 </div>
             </div>
         </div>
 
     </div>
 </section>
-
 
