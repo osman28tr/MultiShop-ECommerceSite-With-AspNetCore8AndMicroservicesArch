@@ -70,5 +70,35 @@ namespace MultiShop.MvcUI.Areas.Admin.Controllers
             }
             return View();
         }
+
+        [Route("Update/{id}")]
+        public async Task<IActionResult> Update(string id)
+        {
+            ViewBag.v1 = "Anasayfa";
+            ViewBag.v2 = "Kategoriler";
+            ViewBag.v3 = "Kategori Güncelleme Sayfası";
+            ViewBag.v4 = "Kategori İşlemleri";
+            var responseMessage = await _httpClient.GetAsync(_catalogCategoryUrl + "/" + id);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<UpdateCategoryDto>(jsonData);
+                return View(values);
+            }
+            return View();
+        }
+        [HttpPost]
+        [Route("Update/{id}")]
+        public async Task<IActionResult> Update(UpdateCategoryDto updateCategoryDto)
+        {
+            var jsonData = JsonConvert.SerializeObject(updateCategoryDto);
+            var stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var responseMessage = await _httpClient.PutAsync(_catalogCategoryUrl, stringContent);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index", "Category", new { area = "Admin" });
+            }
+            return View();
+        }
     }
 }

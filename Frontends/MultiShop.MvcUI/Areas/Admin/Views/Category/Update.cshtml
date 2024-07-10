@@ -1,0 +1,29 @@
+﻿@using MultiShop.DtoLayer.CatalogDtos.CategoryDtos
+@model UpdateCategoryDto
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>Kategori Güncelleme Sayfası</h4>
+                <div class="bs-example" data-example-id="bordered-table">
+                    <form method="post">
+                        <label>Kategori Id</label>
+                        <input type="text" asp-for="Id" readonly class="form-control" />
+                        <br />
+                        <label>Kategori Adı</label>
+                        <input type="text" asp-for="Name" class="form-control"/>
+                        <br/>
+                        <button class="btn btn-primary">Kategori güncelle</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
