@@ -1,11 +1,12 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
+@using MultiShop.DtoLayer.CatalogDtos.CategoryDtos
+@model List<ResultCategoryDto>
+
 <section class="content container-fluid">
     <div class="row">
-
         <div class="col-md-12">
             <div class="chart-box">
                 <h4>Kategori Listesi</h4>
@@ -22,14 +23,19 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>mdo</td>
-                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <th scope="row">@item.Id</th>
+                                <td>@item.Name</td>
+                                <td><a href="#" class="btn btn-warning">Ürünler</a></td>
+                                <td><a href="#" class="btn btn-danger">Sil</a></td>
+                                <td><a href="#" class="btn btn-info">Güncelle</a></td>
+                            </tr>
+                        }
                         </tbody>
                     </table>
+                    <a href="#" class="btn btn-success">Kategori ekle</a>
                 </div>
             </div>
         </div>
