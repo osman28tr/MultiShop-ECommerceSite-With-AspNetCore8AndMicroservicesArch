@@ -7,6 +7,10 @@ namespace MultiShop.MvcUI.Areas.Admin.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.v1 = "Anasayfa";
+            ViewBag.v2 = "Kategoriler";
+            ViewBag.v3 = "Kategori Listesi";
+            ViewBag.v4 = "Kategori İşlemleri";
             return View();
         }
     }
