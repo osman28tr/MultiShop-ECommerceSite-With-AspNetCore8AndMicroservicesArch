@@ -20,5 +20,6 @@ namespace MultiShop.Catalog.Contexts
         public IMongoCollection<Product> Products => _database.GetCollection<Product>(_databaseSettings.ProductCollectionName);
         public IMongoCollection<ProductDetail> ProductDetails => _database.GetCollection<ProductDetail>(_databaseSettings.ProductDetailCollectionName);
         public IMongoCollection<ProductImage> ProductImages => _database.GetCollection<ProductImage>(_databaseSettings.ProductImageCollectionName);
+        public IMongoCollection<FeatureSlider> FeatureSliders => _database.GetCollection<FeatureSlider>(_databaseSettings.FeatureSliderCollectionName);
     }
 }
