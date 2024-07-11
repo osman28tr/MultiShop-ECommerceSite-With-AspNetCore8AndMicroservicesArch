@@ -73,5 +73,54 @@ namespace MultiShop.MvcUI.Areas.Admin.Controllers
             }
             return View();
         }
+        [Route("Update/{id}")]
+        public async Task<IActionResult> Update(string id)
+        {
+            ViewBag.v1 = "Anasayfa";
+            ViewBag.v2 = "Ürünler";
+            ViewBag.v3 = "Ürün Güncelleme";
+            ViewBag.v4 = "Ürün İşlemleri";
+            var responseMessage = await _httpClient.GetAsync(_catalogProductUrl + "/" + id);
+            var responseMessageCategory = await _httpClient.GetAsync(_catalogCategoryUrl);
+            var jsonDataCategory = await responseMessageCategory.Content.ReadAsStringAsync();
+            var categoryValues = JsonConvert.DeserializeObject<List<ResultCategoryDto>>(jsonDataCategory);
+            List<SelectListItem> categoryList = (from x in categoryValues
+                                                 select new SelectListItem
+                {
+                    Text = x.Name,
+                    Value = x.Id
+                }).ToList();
+            ViewBag.CategoryList = categoryList;
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<UpdateProductDto>(jsonData);
+                return View(values);
+            }
+            return View();
+        }
+        [HttpPost]
+        [Route("Update/{id}")]
+        public async Task<IActionResult> Update(UpdateProductDto updateProductDto)
+        {
+            var jsonData = JsonConvert.SerializeObject(updateProductDto);
+            var stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var responseMessage = await _httpClient.PutAsync(_catalogProductUrl, stringContent);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index", "Product", new { area = "Admin" });
+            }
+            return View();
+        }
+        [Route("Delete/{id}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var responseMessage = await _httpClient.DeleteAsync(_catalogProductUrl + "/" + id);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index", "Product", new { area = "Admin" });
+            }
+            return View();
+        }
     }
 }
