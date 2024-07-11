@@ -1,4 +1,6 @@
-﻿namespace MultiShop.Catalog.Dtos.ProductDtos
+﻿using MultiShop.Catalog.Dtos.CategoryDtos;
+
+namespace MultiShop.Catalog.Dtos.ProductDtos
 {
     public class ResultProductDto
     {
@@ -8,5 +10,6 @@
         public decimal Price { get; set; }
         public string ImageUrl { get; set; }
         public string CategoryId { get; set; }
+        public ResultCategoryDto Category { get; set; }
     }
 }

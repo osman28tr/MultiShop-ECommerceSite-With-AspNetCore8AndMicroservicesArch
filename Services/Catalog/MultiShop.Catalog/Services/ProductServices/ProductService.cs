@@ -20,6 +20,10 @@ namespace MultiShop.Catalog.Services.ProductServices
         public async Task<List<ResultProductDto>> GetAllAsync()
         {
             var products = await _context.Products.Find(x => true).ToListAsync();
+            foreach (var item in products)
+            {
+                item.Category = await _context.Categories.Find(x => x.Id == item.CategoryId).FirstOrDefaultAsync();
+            }
             return _mapper.Map<List<ResultProductDto>>(products);
         }
 

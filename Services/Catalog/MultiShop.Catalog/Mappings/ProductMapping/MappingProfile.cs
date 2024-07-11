@@ -8,7 +8,8 @@ namespace MultiShop.Catalog.Mappings.ProductMapping
     {
         public MappingProfile()
         {
-            CreateMap<Product, ResultProductDto>().ReverseMap();
+            CreateMap<Product, ResultProductDto>()
+                .ReverseMap();
             CreateMap<Product, GetByIdProductDto>().ReverseMap();
             CreateMap<Product, CreateProductDto>().ReverseMap();
             CreateMap<Product,UpdateProductDto>().ReverseMap();
