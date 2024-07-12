@@ -4,6 +4,8 @@ using Microsoft.Extensions.Options;
 using MultiShop.Catalog.Contexts;
 using MultiShop.Catalog.Services.CategoryServices;
 using MultiShop.Catalog.Services.CategoryServices.Abstract;
+using MultiShop.Catalog.Services.FeatureSliderServices;
+using MultiShop.Catalog.Services.FeatureSliderServices.Abstract;
 using MultiShop.Catalog.Services.ProductDetailServices;
 using MultiShop.Catalog.Services.ProductDetailServices.Abstract;
 using MultiShop.Catalog.Services.ProductImageServices;
@@ -29,6 +31,7 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductDetailService, ProductDetailService>();
 builder.Services.AddScoped<IProductImageService, ProductImageService>();
+builder.Services.AddScoped<IFeatureSliderService, FeatureSliderService>();
 
 builder.Services.Configure<DatabaseSetting>(builder.Configuration.GetSection("DatabaseSettings"));
 builder.Services.AddScoped<IDatabaseSetting>(sp =>
