@@ -19,13 +19,13 @@ namespace MultiShop.Order.Persistance.Repositories
         }
         public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>> filter)
         {
-            var entities = filter == null ? await _context.Set<T>().ToListAsync() : await _context.Set<T>().Where(filter).ToListAsync();
+            var entities = filter == null ? await _context.Set<T>().AsNoTracking().ToListAsync() : await _context.Set<T>().Where(filter).ToListAsync();
             return entities;
         }
 
         public async Task<T> GetAsync(Expression<Func<T, bool>> filter)
         {
-            var entity = await _context.Set<T>().FirstOrDefaultAsync(filter);
+            var entity = await _context.Set<T>().AsNoTracking().FirstOrDefaultAsync(filter);
             return entity;
         }
 

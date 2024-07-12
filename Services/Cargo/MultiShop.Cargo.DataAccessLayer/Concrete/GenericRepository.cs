@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -31,12 +32,12 @@ namespace MultiShop.Cargo.DataAccessLayer.Concrete
 
         public Task<List<T>> GetAllAsync()
         {
-            return _context.Set<T>().ToListAsync();
+            return _context.Set<T>().AsNoTracking().ToListAsync();
         }
 
-        public async Task<T> GetAsync(Func<T, bool> predicate)
+        public async Task<T> GetAsync(Expression<Func<T, bool>> predicate)
         {
-            var value = await _context.Set<T>().FindAsync(predicate);
+            var value = await _context.Set<T>().AsNoTracking().FirstOrDefaultAsync(predicate);
             return value;
         }
 
