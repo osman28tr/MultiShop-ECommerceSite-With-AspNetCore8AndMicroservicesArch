@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using MultiShop.DtoLayer.CatalogDtos.CategoryDtos
+@model CreateFeatureSliderDto
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>Öne Çıkan Görsel Slider Ekleme Sayfası</h4>
+                <p>Öne Çıkan Görsel Slider ile ilgili ekleme işlemlerinizi aşağıdaki panel üzerinden gerçekleştirebilirsiniz.</p>
+                <div class="bs-example" data-example-id="bordered-table">
+                    <form method="post">
+                        <label>Görsel Başlığı</label>
+                        <input type="text" asp-for="Title" class="form-control" />
+                        <br />
+                        <label>Görsel Açıklaması</label>
+                        <input type="text" asp-for="Description" class="form-control" />
+                        <br />
+                        <label>Görsel Url</label>
+                        <input type="text" asp-for="ImageUrl" class="form-control" />
+                        <br />
+                        <button class="btn btn-primary">Slider ekle</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

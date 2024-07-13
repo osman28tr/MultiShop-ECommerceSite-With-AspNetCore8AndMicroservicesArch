@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using MultiShop.DtoLayer.CatalogDtos.CategoryDtos
+@model UpdateFeatureSliderDto
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>Öne Çıkan Görsel Slider Güncelleme Sayfası</h4>
+                <div class="bs-example" data-example-id="bordered-table">
+                    <form method="post">
+                        <label>Öne Çıkan Slider Görsel Id</label>
+                        <input type="text" asp-for="Id" readonly class="form-control" />
+                        <br />
+                        <label>Öne Çıkan Görsel Slider Başlığı</label>
+                        <input type="text" asp-for="Title" class="form-control" />
+                        <br />
+                        <label>Öne Çıkan Görsel Slider Açıklaması</label>
+                        <input type="text" asp-for="Description" class="form-control" />
+                        <br />
+                        <label>Öne Çıkan Görsel Slider Url</label>
+                        <input type="text" asp-for="ImageUrl" class="form-control" />
+                        <br />
+                        <label>Öne Çıkan Görsel Slider Durumu</label>
+                        <input type="checkbox" asp-for="Status" class="form-group" />
+                        <br />
+                        <button class="btn btn-primary">Kategori güncelle</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
