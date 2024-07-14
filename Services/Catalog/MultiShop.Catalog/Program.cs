@@ -12,6 +12,8 @@ using MultiShop.Catalog.Services.ProductImageServices;
 using MultiShop.Catalog.Services.ProductImageServices.Abtract;
 using MultiShop.Catalog.Services.ProductServices;
 using MultiShop.Catalog.Services.ProductServices.Abstract;
+using MultiShop.Catalog.Services.SpecialOfferServices;
+using MultiShop.Catalog.Services.SpecialOfferServices.Abstract;
 using MultiShop.Catalog.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,6 +34,7 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductDetailService, ProductDetailService>();
 builder.Services.AddScoped<IProductImageService, ProductImageService>();
 builder.Services.AddScoped<IFeatureSliderService, FeatureSliderService>();
+builder.Services.AddScoped<ISpecialOfferService, SpecialOfferService>();
 
 builder.Services.Configure<DatabaseSetting>(builder.Configuration.GetSection("DatabaseSettings"));
 builder.Services.AddScoped<IDatabaseSetting>(sp =>
