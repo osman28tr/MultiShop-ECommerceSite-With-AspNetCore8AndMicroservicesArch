@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using MultiShop.DtoLayer.CatalogDtos.CategoryDtos
+@model CreateSpecialOfferDto
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>Özel Teklif Ekleme Sayfası</h4>
+                <p>Özel teklif ile ilgili ekleme işlemlerinizi aşağıdaki panel üzerinden gerçekleştirebilirsiniz.</p>
+                <div class="bs-example" data-example-id="bordered-table">
+                    <form method="post">
+                        <label>Teklif Başlığı</label>
+                        <input type="text" asp-for="Title" class="form-control" />
+                        <br />
+                        <label>Teklif Alt Başlığı</label>
+                        <input type="text" asp-for="SubTitle" class="form-control" />
+                        <br />
+                        <label>Teklif Görseli</label>
+                        <input type="text" asp-for="ImageUrl" class="form-control" />
+                        <br />
+                        <button class="btn btn-primary">Teklif ekle</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
