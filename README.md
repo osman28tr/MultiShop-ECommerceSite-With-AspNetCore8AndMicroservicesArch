@@ -12,4 +12,14 @@
 <h3>4. General Outlines of the Architecture Used in the Project</h3>
 <img src="Sources/Images/microservicearch.PNG">
 
+<h3>5. Setup</h3>
+<ul>
+    <li>If Docker is not installed on your computer, download and install it.</li>
+    <li>
+Then open the terminal and enter the "docker-compose up" command.</li>
+<li>
+After entering the command, all databases in our project will work with the docker container.</li>
+<li>Then open the MultiShop.Order.Persistance layer in the terminal and enter the "update-database" command. In this way, tables related to the order database will be reflected in the database.</li>
+<li>Then go to the "multiple startup projects" section and start the microservices in our project and then run the project by pressing the start button.</li>
+</ul>
 <b>Note: </b>You can access the Turkish document of the project from the ReadmeTr file.

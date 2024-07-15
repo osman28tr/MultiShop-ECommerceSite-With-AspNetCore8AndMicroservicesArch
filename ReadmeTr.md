@@ -11,3 +11,14 @@
 
 <h3>4. Projede Kullanılan Mimarinin Genel Hatları</h3>
 <img src="Sources/Images/microservicearch.PNG">
+
+<h3>5. Kurulum</h3>
+<ul>
+    <li>Docker bilgisayarınızda kurulu değilse, indirip kurunuz.</li>
+    <li>
+Kurduktan sonra visual studio'da terminali açınız ve "docker-compose up" komutunu giriniz.</li>
+<li>
+Komut girildikten sonra projemizdeki tüm veritabanları docker container ile beraber ayağa kalkacaktır.</li>
+<li>Daha sonra terminalde MultiShop.Order.Persistance katmanını açınız ve "update-database" komutunu giriniz. Bu sayede order veritabanı ile ilgili tablolar veritabanına yansıyacaktır.</li>
+<li>Daha sonra "multiple startup projects" bölümüne giderek projemizdeki mikroservisleri start durumuna getiriniz ve ardından start butonuna basarak projeyi çalıştırınız.</li>
+</ul>
