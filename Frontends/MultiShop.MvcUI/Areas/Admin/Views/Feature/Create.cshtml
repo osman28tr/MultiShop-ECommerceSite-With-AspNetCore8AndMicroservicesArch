@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@model CreateFeatureDto
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>Öne Çıkan Alan Ekleme Sayfası</h4>
+                <p>Öne Çıkan Alan ile ilgili ekleme işlemlerinizi aşağıdaki panel üzerinden gerçekleştirebilirsiniz.</p>
+                <div class="bs-example" data-example-id="bordered-table">
+                    <form method="post">
+                        <label>Öne Çıkan Alan Adı</label>
+                        <input type="text" asp-for="Title" class="form-control" />
+                        <br />
+                        <label>Öne Çıkan Alan Görseli</label>
+                        <input type="text" asp-for="Icon" class="form-control" />
+                        <br />
+                        <button class="btn btn-primary">Öne çıkan alan ekle</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
