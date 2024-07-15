@@ -18,8 +18,8 @@ namespace MultiShop.Catalog.Services.CategoryServices
         }
         public async Task AddAsync(CreateCategoryDto createCategoryDto)
         {
-            var categoryDto = new Category() { Name = createCategoryDto.Name };
-            await _context.Categories.InsertOneAsync(categoryDto);
+            var categoryMapping = _mapper.Map<Category>(createCategoryDto);
+            await _context.Categories.InsertOneAsync(categoryMapping);
         }
 
         public async Task DeleteAsync(string categoryId)

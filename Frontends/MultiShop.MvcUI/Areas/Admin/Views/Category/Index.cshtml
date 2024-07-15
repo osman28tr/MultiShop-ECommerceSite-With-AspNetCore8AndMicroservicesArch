@@ -18,7 +18,7 @@
                         <tr>
                             <th>#</th>
                             <th>Kategori Adı</th>
-                                @*<th>Ürünler</th>*@
+                            <th>Kategori Görsel</th>
                             <th>Sil</th>
                             <th>Güncelle</th>
                         </tr>
@@ -30,7 +30,7 @@
                             <tr>
                                 <th scope="row">@count</th>
                                 <td>@item.Name</td>
-                                    @* <td><a href="#" class="btn btn-warning">Ürünler</a></td>*@
+                                <td>@item.ImageUrl</td>
                                 <td><a href="/Admin/Category/Delete/@item.Id" class="btn btn-danger">Sil</a></td>
                                     <td><a href="/Admin/Category/Update/@item.Id" class="btn btn-info">Güncelle</a></td>
                             </tr>
