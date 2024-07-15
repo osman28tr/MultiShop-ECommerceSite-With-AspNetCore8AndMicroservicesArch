@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+@model List<ResultOfferDiscountDto>
+@{
+    int count = 0;
+}
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>İndirim Teklif Listesi</h4>
+                <p>İndirimler ile ilgili işlemlerinizi aşağıdaki tablo üzerinden gerçekleştirebilirsiniz.</p>
+                <div class="bs-example" data-example-id="bordered-table">
+                    <table id="tblindirimler" class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>İndirim Teklif Başlığı</th>
+                            <th>İndirim Alt Teklif Başlığı</th>
+                            <th>İndirim Teklif Görsel</th>
+                            <th>Sil</th>
+                            <th>Güncelle</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var item in Model)
+                        {
+                            count++;
+                            <tr>
+                                <th scope="row">@count</th>
+                                <td>@item.Title</td>
+                                <td>@item.SubTitle</td>
+                                <td>@item.ImageUrl</td>
+                                <td><a href="/Admin/OfferDiscount/Delete/@item.Id" class="btn btn-danger">Sil</a></td>
+                                <td><a href="/Admin/OfferDiscount/Update/@item.Id" class="btn btn-info">Güncelle</a></td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                    <a href="/Admin/OfferDiscount/Create/" id="btnekle" class="btn btn-success">İndirim ekle</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<script>
+    $(document).ready(function () {
+        //if 3 rows
+        if ($('#tblindirimler').each(function () {
+            var rowCount = $('#tblindirimler tr').length;
+            if (rowCount == 3) {
+                // a tag disable true
+                $('#btnekle').attr('disabled', true);
+                $('#btnekle').css('pointer-events', 'none');
+            }
+        }));
+    });
+</script>
+
