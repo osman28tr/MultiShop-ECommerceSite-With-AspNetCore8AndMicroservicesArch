@@ -16,12 +16,14 @@ using MultiShop.Catalog.Services.ProductServices;
 using MultiShop.Catalog.Services.SpecialOfferServices.Abstract;
 using MultiShop.Catalog.Services.SpecialOfferServices;
 using System.Reflection;
+using Microsoft.Extensions.Options;
+using MultiShop.Catalog.Settings;
 
 namespace MultiShop.Catalog.Extensions
 {
     public static class CatalogAPIServicesRegistration
     {
-        public static IServiceCollection AddCatalogAPIServices(this IServiceCollection services)
+        public static IServiceCollection AddCatalogAPIServices(this IServiceCollection services,IConfiguration configuration)
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddScoped<MultiShopCatalogContext>();
@@ -33,6 +35,13 @@ namespace MultiShop.Catalog.Extensions
             services.AddScoped<ISpecialOfferService, SpecialOfferService>();
             services.AddScoped<IFeatureService, FeatureService>();
             services.AddScoped<IOfferDiscountService, OfferDiscountService>();
+
+            services.Configure<DatabaseSetting>(configuration.GetSection("DatabaseSettings"));
+            services.AddScoped<IDatabaseSetting>(sp =>
+            {
+                return sp.GetRequiredService<IOptions<DatabaseSetting>>().Value;
+            });
+
             return services;
         }
     }

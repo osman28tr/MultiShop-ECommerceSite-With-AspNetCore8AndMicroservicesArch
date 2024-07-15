@@ -32,13 +32,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 });
 
 builder.Services.AddControllers();
-builder.Services.AddCatalogAPIServices();
+builder.Services.AddCatalogAPIServices(builder.Configuration);
 
-builder.Services.Configure<DatabaseSetting>(builder.Configuration.GetSection("DatabaseSettings"));
-builder.Services.AddScoped<IDatabaseSetting>(sp =>
-{
-    return sp.GetRequiredService<IOptions<DatabaseSetting>>().Value;
-});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
