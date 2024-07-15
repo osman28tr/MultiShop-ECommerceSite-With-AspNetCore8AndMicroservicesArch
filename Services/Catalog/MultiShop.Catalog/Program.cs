@@ -8,6 +8,8 @@ using MultiShop.Catalog.Services.FeatureServices;
 using MultiShop.Catalog.Services.FeatureServices.Abstract;
 using MultiShop.Catalog.Services.FeatureSliderServices;
 using MultiShop.Catalog.Services.FeatureSliderServices.Abstract;
+using MultiShop.Catalog.Services.OfferDiscountServices;
+using MultiShop.Catalog.Services.OfferDiscountServices.Abstract;
 using MultiShop.Catalog.Services.ProductDetailServices;
 using MultiShop.Catalog.Services.ProductDetailServices.Abstract;
 using MultiShop.Catalog.Services.ProductImageServices;
@@ -38,6 +40,7 @@ builder.Services.AddScoped<IProductImageService, ProductImageService>();
 builder.Services.AddScoped<IFeatureSliderService, FeatureSliderService>();
 builder.Services.AddScoped<ISpecialOfferService, SpecialOfferService>();
 builder.Services.AddScoped<IFeatureService, FeatureService>();
+builder.Services.AddScoped<IOfferDiscountService, OfferDiscountService>();
 
 builder.Services.Configure<DatabaseSetting>(builder.Configuration.GetSection("DatabaseSettings"));
 builder.Services.AddScoped<IDatabaseSetting>(sp =>
