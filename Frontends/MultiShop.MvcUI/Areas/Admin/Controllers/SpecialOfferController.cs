@@ -60,7 +60,6 @@ namespace MultiShop.MvcUI.Areas.Admin.Controllers
             return View();
         }
         [Route("Delete/{id}")]
-        [HttpDelete]
         public async Task<IActionResult> Delete(string id)
         {
             var responseMessage = await _httpClient.DeleteAsync(_catalogSpecialOfferUrl + "/" + id);

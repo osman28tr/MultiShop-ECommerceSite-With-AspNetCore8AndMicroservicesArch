@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model CreateCustomerDto
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>Müşteri Ekleme Sayfası</h4>
+                <p>Müşteriler ile ilgili ekleme işlemlerinizi aşağıdaki panel üzerinden gerçekleştirebilirsiniz.</p>
+                <div class="bs-example" data-example-id="bordered-table">
+                    <form method="post">
+                        <label>Müşteri Adı</label>
+                        <input type="text" asp-for="Name" class="form-control" />
+                        <br />
+                        <label>Müşteri Görseli</label>
+                        <input type="text" asp-for="ImageUrl" class="form-control" />
+                        <br />
+                        <button class="btn btn-primary">Müşteri ekle</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
