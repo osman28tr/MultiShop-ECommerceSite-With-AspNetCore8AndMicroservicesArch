@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model UpdateAboutDto
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>Hakkımda Alanı Güncelleme Sayfası</h4>
+                <div class="bs-example" data-example-id="bordered-table">
+                    <form method="post">
+                        <label>Hakkımda Alanı Id</label>
+                        <input type="text" asp-for="Id" readonly class="form-control" />
+                        <br />
+                        <label>Açıklama</label>
+                        <input type="text" asp-for="Description" class="form-control" />
+                        <br />
+                        <label>Adres</label>
+                        <input type="text" asp-for="Address" class="form-control" />
+                        <br />
+                        <label>Email</label>
+                        <input type="text" asp-for="Email" class="form-control" />
+                        <br />
+                        <label>Telefon</label>
+                        <input type="text" asp-for="Phone" class="form-control" />
+                        <br />
+                        <button class="btn btn-primary">Hakkımda alanı güncelle</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
