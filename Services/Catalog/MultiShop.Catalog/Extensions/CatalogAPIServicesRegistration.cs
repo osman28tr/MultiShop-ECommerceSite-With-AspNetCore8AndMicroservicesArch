@@ -17,6 +17,8 @@ using MultiShop.Catalog.Services.SpecialOfferServices.Abstract;
 using MultiShop.Catalog.Services.SpecialOfferServices;
 using System.Reflection;
 using Microsoft.Extensions.Options;
+using MultiShop.Catalog.Services.AboutServices;
+using MultiShop.Catalog.Services.AboutServices.Abstract;
 using MultiShop.Catalog.Services.CustomerServices;
 using MultiShop.Catalog.Services.CustomerServices.Abstract;
 using MultiShop.Catalog.Settings;
@@ -38,6 +40,7 @@ namespace MultiShop.Catalog.Extensions
             services.AddScoped<IFeatureService, FeatureService>();
             services.AddScoped<IOfferDiscountService, OfferDiscountService>();
             services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IAboutService, AboutService>();
             
             services.Configure<DatabaseSetting>(configuration.GetSection("DatabaseSettings"));
             services.AddScoped<IDatabaseSetting>(sp =>

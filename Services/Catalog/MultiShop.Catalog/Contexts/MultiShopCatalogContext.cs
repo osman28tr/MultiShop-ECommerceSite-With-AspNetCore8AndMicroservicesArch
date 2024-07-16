@@ -25,5 +25,6 @@ namespace MultiShop.Catalog.Contexts
         public IMongoCollection<Feature> Features => _database.GetCollection<Feature>(_databaseSettings.FeatureCollectionName);
         public IMongoCollection<OfferDiscount> OfferDiscounts => _database.GetCollection<OfferDiscount>(_databaseSettings.OfferDiscountCollectionName);
         public IMongoCollection<Customer> Customers => _database.GetCollection<Customer>(_databaseSettings.CustomerCollectionName);
+        public IMongoCollection<About> Abouts => _database.GetCollection<About>(_databaseSettings.AboutCollectionName);
     }
 }
