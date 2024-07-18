@@ -20,9 +20,6 @@
                         <label>Ürün Görseli</label>
                         <input type="text" asp-for="ImageUrl" class="form-control" />
                         <br />
-                        <label>Ürün Açıklama</label>
-                        <textarea asp-for="Description" rows="5" class="form-control"></textarea>
-                        <br />
                         <label>Kategori</label>
                         @Html.DropDownListFor(x => x.CategoryId, (List<SelectListItem>)ViewBag.CategoryList,new{@class="form-control"})
                         <br />

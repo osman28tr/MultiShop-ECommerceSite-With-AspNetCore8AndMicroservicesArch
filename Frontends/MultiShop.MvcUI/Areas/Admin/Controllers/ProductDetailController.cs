@@ -23,18 +23,63 @@ namespace MultiShop.MvcUI.Areas.Admin.Controllers
             _catalogProductImagesUrl = Configuration["CatalogAPI:ProductDetailImageUrl"]!;
             _catalogProductDetailUrl = Configuration["CatalogAPI:ProductDetailUrl"]!;
         }
+        [HttpGet]
+        [Route("Index/{productId}")]
         public async Task<IActionResult> Index(string productId)
         {
             ViewBag.v1 = "Anasayfa";
             ViewBag.v2 = "Ürün Açıklamaları";
             ViewBag.v3 = "Ürün Açıklama Sayfası";
             ViewBag.v4 = "Ürün Açıklama İşlemleri";
-            var responseMessage = await _httpClient.GetAsync(_catalogProductDetailUrl + "/GetListByProduct/" + productId);
+            ViewBag.ProductId = productId;
+            var responseMessage = await _httpClient.GetAsync(_catalogProductDetailUrl + "/GetByProduct/" + productId);
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultProductDetailDto>>(jsonData);
+                var values = JsonConvert.DeserializeObject<ResultProductDetailDto>(jsonData);
                 return View(values);
+            }
+            return View();
+        }
+        [HttpPost]
+        [Route("Index/{productId}")]
+        public async Task<IActionResult> Index(ResultProductDetailDto resultProductDetailDto)
+        {
+            UpdateProductDetailDto updateProductDetailDto = new()
+            {
+                Id = resultProductDetailDto.Id,
+                Description = resultProductDetailDto.Description,
+                Info = resultProductDetailDto.Info,
+                ProductId = resultProductDetailDto.ProductId
+            };
+            var jsonData = JsonConvert.SerializeObject(updateProductDetailDto);
+            var stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var responseMessage = await _httpClient.PutAsync(_catalogProductDetailUrl, stringContent);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("ProductListWithCategory", "Product", new { area = "Admin" });
+            }
+            return View();
+        }
+
+        [HttpGet]
+        [Route("Create/{productId}")]
+        public IActionResult Create(string productId)
+        {
+            ViewBag.ProductId = productId;
+            return View();
+        }
+        [HttpPost]
+        [Route("Create/{productId}")]
+        public async Task<IActionResult> Create(string productId, CreateProductDetailDto createProductDetailDto)
+        {
+            createProductDetailDto.ProductId = productId;
+            var jsonData = JsonConvert.SerializeObject(createProductDetailDto);
+            var stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var responseMessage = await _httpClient.PostAsync(_catalogProductDetailUrl, stringContent);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("ProductListWithCategory", "Product", new { area = "Admin" });
             }
             return View();
         }

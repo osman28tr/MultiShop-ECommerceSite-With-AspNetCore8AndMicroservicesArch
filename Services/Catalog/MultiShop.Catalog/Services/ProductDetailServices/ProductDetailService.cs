@@ -22,10 +22,10 @@ namespace MultiShop.Catalog.Services.ProductDetailServices
             return _mapper.Map<List<ResultProductDetailDto>>(productDetails);
         }
 
-        public async Task<List<ResultProductDetailDto>> GetAllByProductAsync(string productId)
+        public async Task<ResultProductDetailDto> GetByProductAsync(string productId)
         {
-            var productDetails = await _context.ProductDetails.Find(x => x.ProductId == productId).ToListAsync();
-            return _mapper.Map<List<ResultProductDetailDto>>(productDetails);
+            var productDetail = await _context.ProductDetails.Find(x => x.ProductId == productId).FirstOrDefaultAsync();
+            return _mapper.Map<ResultProductDetailDto>(productDetail);
         }
 
         public async Task<GetByIdProductDetailDto> GetByIdProductDetailAsync(string productDetailId)

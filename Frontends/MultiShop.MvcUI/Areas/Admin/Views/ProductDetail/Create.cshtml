@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model CreateProductDetailDto
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>Ürün Detay Ekleme Sayfası</h4>
+                <p>Ürün detay ekleme ile ilgili ekleme işlemlerinizi aşağıdaki panel üzerinden gerçekleştirebilirsiniz.</p>
+                <div class="bs-example" data-example-id="bordered-table">
+                    <form method="post">
+                        <label>Ürün Id</label>
+                        <input type="text" name="@ViewBag.ProductId" value="@ViewBag.ProductId" readonly class="form-control" />
+                        <br />
+                        <label>Ürün Detay Açıklama</label>
+                        <input type="text" name="Description" class="form-control"/>
+                        <br/>
+                        <label>Ürün Detay Bilgi</label>
+                        <input type="text" name="Info" class="form-control"/>
+                        <br/>
+                        <button class="btn btn-primary">Ürün detay ekle</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

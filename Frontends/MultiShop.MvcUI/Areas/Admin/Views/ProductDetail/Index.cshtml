@@ -4,5 +4,45 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Index</h1>
+
+@model ResultProductDetailDto?
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>Ürün Detay Sayfası</h4>
+                <div class="bs-example" data-example-id="bordered-table">
+                    @if (Model == null)
+                    {
+                        //create alert message
+                        <div class="alert alert-danger" role="alert">
+                            Ürün detayı bulunamadı. Aşağıdaki linkten ürün detayı ekleyebilirsiniz.
+                            <br/>
+                            <a asp-action="Create" asp-controller="ProductDetail" asp-route-productId="@ViewBag.ProductId" class="alert alert-link">Ürün Detay Ekle</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <form method="post">
+                            <label>Ürün Detay Id</label>
+                            <input type="text" asp-for="Id" readonly class="form-control"/>
+                            <br/>
+                            <label>Ürün Id</label>
+                            <input type="text" asp-for="ProductId" readonly class="form-control"/>
+                            <br/>
+                            <label>Ürün Açıklama</label>
+                            <input type="text" asp-for="Description" class="form-control"/>
+                            <br/>
+                            <label>Ürün Bilgi</label>
+                            <input type="text" asp-for="Info" class="form-control"/>
+                            <br/>
+                            <button class="btn btn-primary" type="submit">Ürün detay güncelle</button>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
