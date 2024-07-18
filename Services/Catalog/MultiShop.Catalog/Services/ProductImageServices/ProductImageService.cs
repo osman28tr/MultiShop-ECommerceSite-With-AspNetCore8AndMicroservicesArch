@@ -22,10 +22,10 @@ namespace MultiShop.Catalog.Services.ProductImageServices
             return _mapper.Map<List<ResultProductImageDto>>(productImages);
         }
 
-        public async Task<UpdateProductImageDto> GetAllByProductAsync(string productId)
+        public async Task<List<ResultProductImageDto>> GetAllByProductAsync(string productId)
         {
             var productImages = await _context.ProductImages.Find(x => x.ProductId == productId).ToListAsync();
-            var updateProductImageDto = _mapper.Map<UpdateProductImageDto>(productImages);
+            var updateProductImageDto = _mapper.Map<List<ResultProductImageDto>>(productImages);
             return updateProductImageDto;
         }
 

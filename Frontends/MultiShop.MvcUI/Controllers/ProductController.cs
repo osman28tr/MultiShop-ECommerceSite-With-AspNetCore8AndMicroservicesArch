@@ -31,7 +31,8 @@ namespace MultiShop.MvcUI.Controllers
             }
             return View();
         }
-
+        [HttpGet]
+        [Route("Detail/{id}")]
         public async Task<IActionResult> Detail(string id)
         {
             ViewBag.Id = id;
