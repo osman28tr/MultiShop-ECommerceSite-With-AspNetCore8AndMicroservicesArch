@@ -1,4 +1,5 @@
-﻿@{
+﻿@model ResultProductDto
+@{
     ViewData["Title"] = "Detail";
     Layout = "~/Views/Shared/_UILayout.cshtml";
 }
@@ -19,10 +20,10 @@
 <!-- Shop Detail Start -->
 <div class="container-fluid pb-5">
     <div class="row px-xl-5">
-        @await Component.InvokeAsync("_ProductDetailImageSliderComponentPartial")
+        @await Component.InvokeAsync("_ProductDetailImageSliderComponentPartial", new { productId = ViewBag.Id })
         <div class="col-lg-7 h-auto mb-30">
             <div class="h-100 bg-light p-30">
-                <h3>Spor Ayakkabı</h3>
+                <h3>@Model.Name</h3>
                 <div class="d-flex mb-3">
                     <div class="text-primary mr-2">
                         <small class="fas fa-star"></small>
@@ -33,9 +34,9 @@
                     </div>
                     <small class="pt-1">(54 Değerlendirme)</small>
                 </div>
-                <h3 class="font-weight-semi-bold mb-4">$150.00</h3>
+                <h3 class="font-weight-semi-bold mb-4">@Model.Price</h3>
                 <p class="mb-4">
-                   Spor yaparken ayağınız rahat hissettirecek güzel bir ayakkabı.
+                   @Model.Description
                 </p>
                 <div class="d-flex mb-3">
                     <strong class="text-dark mr-3">Bedenler:</strong>

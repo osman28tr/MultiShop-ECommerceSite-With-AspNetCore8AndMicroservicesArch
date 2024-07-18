@@ -1,10 +1,11 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "ProductListWithCategory";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 @model List<ResultProductWithCategoryDto>
-@{ int count = 0;}
+@{
+    int count = 0;
+}
 <section class="content container-fluid">
     <div class="row">
         <div class="col-md-12">
@@ -14,30 +15,30 @@
                 <div class="bs-example" data-example-id="bordered-table">
                     <table class="table table-bordered">
                         <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Ürün Adı</th>
-                            <th>Ürün Fiyatı</th>
-                            <th>Ürün Kategori</th>
-                            @*<th>Ürünler</th>*@
-                            <th>Sil</th>
-                            <th>Güncelle</th>
-                        </tr>
+                            <tr>
+                                <th>#</th>
+                                <th>Ürün Adı</th>
+                                <th>Ürün Fiyatı</th>
+                                <th>Ürün Kategori</th>
+                                <th>Ürün Görselleri</th>
+                                <th>Sil</th>
+                                <th>Güncelle</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        @foreach (var product in Model)
-                        {
-                            count++;
-                            <tr>
-                                <th scope="row">@count</th>
-                                <td>@product.Name</td>
-                                <td>@product.Price</td>
-                                <td>@product.Category.Name</td>
-                                @*<td><a href="#" class="btn btn-warning">Ürünler</a></td>*@
-                                <td><a href="/Admin/Product/Delete/@product.Id" class="btn btn-danger">Sil</a></td>
-                                <td><a href="/Admin/Product/Update/@product.Id" class="btn btn-info">Güncelle</a></td>
-                            </tr>
-                        }
+                            @foreach (var product in Model)
+                            {
+                                count++;
+                                <tr>
+                                    <th scope="row">@count</th>
+                                    <td>@product.Name</td>
+                                    <td>@product.Price</td>
+                                    <td>@product.Category.Name</td>
+                                    <td><a href="/Admin/ProductDetail/ProductDetailImage/@product.Id" class="btn btn-warning">Ürün Görselleri</a></td>
+                                    <td><a href="/Admin/Product/Delete/@product.Id" class="btn btn-danger">Sil</a></td>
+                                    <td><a href="/Admin/Product/Update/@product.Id" class="btn btn-info">Güncelle</a></td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                     <a href="/Admin/Product/Create/" class="btn btn-success">Ürün ekle</a>

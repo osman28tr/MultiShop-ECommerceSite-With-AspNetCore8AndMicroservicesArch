@@ -54,7 +54,7 @@ namespace MultiShop.MvcUI.Areas.Admin.Controllers
             var responseMessage = await _httpClient.PostAsync(_catalogAboutUrl, stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index", "About", new { area = "Admin" });
+                return RedirectToAction(nameof(Index), "About", new { area = "Admin" });
             }
             return View();
         }
@@ -64,7 +64,7 @@ namespace MultiShop.MvcUI.Areas.Admin.Controllers
             var responseMessage = await _httpClient.DeleteAsync(_catalogAboutUrl + "/" + id);
             if (responseMessage.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index", "About", new { area = "Admin" });
+                return RedirectToAction(nameof(Index), "About", new { area = "Admin" });
             }
             return View();
         }
@@ -94,7 +94,7 @@ namespace MultiShop.MvcUI.Areas.Admin.Controllers
             var responseMessage = await _httpClient.PutAsync(_catalogAboutUrl, stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index", "About", new { area = "Admin" });
+                return RedirectToAction(nameof(Index), "About", new { area = "Admin" });
             }
             return View();
         }

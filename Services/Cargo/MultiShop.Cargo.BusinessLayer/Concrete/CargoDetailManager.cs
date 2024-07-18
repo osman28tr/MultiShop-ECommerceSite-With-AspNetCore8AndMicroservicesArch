@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using MultiShop.Cargo.BusinessLayer.Abstract;
@@ -22,7 +23,7 @@ namespace MultiShop.Cargo.BusinessLayer.Concrete
             return await _cargoDetailDal.GetByIdAsync(id);
         }
 
-        public async Task<CargoDetail> TGetAsync(Func<CargoDetail, bool> predicate)
+        public async Task<CargoDetail> TGetAsync(Expression<Func<CargoDetail, bool>> predicate)
         {
             return await _cargoDetailDal.GetAsync(predicate);
         }

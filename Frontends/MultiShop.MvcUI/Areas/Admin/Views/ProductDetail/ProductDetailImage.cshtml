@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewData["Title"] = "ProductDetailImage";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@model UpdateProductImageDto
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>Ürün Görsel Güncelleme Sayfası</h4>
+                <div class="bs-example" data-example-id="bordered-table">
+                @foreach (var item in Model.Images)
+                {
+                    <form method="post">
+
+                        <label>Ürün Görsel Id</label>
+                        <input type="text" asp-for="@item.Id" readonly class="form-control"/>
+                        <br/>
+                        <label>Ürün Id</label>
+                        <input type="text" asp-for="@item.ProductId" readonly class="form-control"/>
+                        <br/>
+                        <label>Ürün Görsel</label>
+                        <input type="text" asp-for="@item.ImageDetailUrl" class="form-control"/>
+                        <br/>
+                        <button class="btn btn-primary" type="submit">Öne çıkan alan güncelle</button>
+                        
+                    </form>
+                }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

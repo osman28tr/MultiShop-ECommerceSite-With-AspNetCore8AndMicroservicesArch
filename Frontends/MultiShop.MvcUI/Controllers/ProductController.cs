@@ -32,8 +32,17 @@ namespace MultiShop.MvcUI.Controllers
             return View();
         }
 
-        public IActionResult Detail()
+        public async Task<IActionResult> Detail(string id)
         {
+            ViewBag.Id = id;
+            HttpResponseMessage responseMessage;
+            responseMessage = await _httpClient.GetAsync(_catalogProductUrl + "/" + id);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<ResultProductDto>(jsonData);
+                return View(values);
+            }
             return View();
         }
     }

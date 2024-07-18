@@ -3,7 +3,7 @@
     public class UpdateProductImageDto
     {
         public string Id { get; set; }
-        public string ImageDetailUrl { get; set; }
         public string ProductId { get; set; }
+        public string ImageDetailUrl { get; set; }
     }
 }
