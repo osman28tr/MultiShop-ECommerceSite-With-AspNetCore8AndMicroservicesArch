@@ -4,5 +4,6 @@ Services
 	-orderAPI=>5252
 	-cargoAPI=>5253
 	-basketAPI=>5254
+	-commentAPI=>5255
 
 identityserver=>5001
