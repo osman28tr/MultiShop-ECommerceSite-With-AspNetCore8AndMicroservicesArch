@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@model List<ResultReviewDto>
+@{
+    int count = 0;
+}
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>Yorum Listesi</h4>
+                <p>Yorumlar ile ilgili işlemlerinizi aşağıdaki tablo üzerinden gerçekleştirebilirsiniz.</p>
+                <div class="bs-example" data-example-id="bordered-table">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Yorum</th>
+                                <th>Puan</th>
+                                <th>Durum</th>
+                                <th>Oluşturulma Tarihi</th>
+                                <th>Kullanıcı İsmi</th>
+                                <th>Kullanıcı Soyismi</th>
+                                <th>Kullanıcı Email</th>
+                                <th>Kullanıcı Resim</th>
+                                <th>Sil</th>
+                                <th>Güncelle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                count++;
+                                <tr>
+                                    <th scope="row">@count</th>
+                                    <td>@item.Content</td>
+                                    <td>@item.Rating</td>
+                                    <td>@item.Status</td>
+                                    <td>@item.CreatedDate</td>
+                                    <td>@item.User.Name</td>
+                                    <td>@item.User.Surname</td>
+                                    <td>@item.User.Email</td>
+                                    <td>@item.User.Image</td>
+                                    <td><a href="/Admin/Comment/Delete/@item.Id" class="btn btn-danger">Sil</a></td>
+                                    <td><a href="/Admin/Comment/Update/@item.Id" class="btn btn-info">Güncelle</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

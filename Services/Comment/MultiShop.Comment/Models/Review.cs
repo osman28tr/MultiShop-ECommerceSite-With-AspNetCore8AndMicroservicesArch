@@ -26,6 +26,7 @@ namespace MultiShop.Comment.Models
                 Content = Content,
                 Rating = Rating,
                 Status = Status,
+                CreatedDate = CreatedDate,
                 User = new UserModel()
                 {
                     Id = User.Id,
@@ -45,6 +46,7 @@ namespace MultiShop.Comment.Models
                 Content = Content,
                 Rating = Rating,
                 Status = Status,
+                CreatedDate = CreatedDate,
                 User = new UserModel()
                 {
                     Id = User.Id,
