@@ -10,7 +10,7 @@
 <h3>3. Language and Development Environment Used: C# - .Net 8.0</h3>
 
 <h3>4. General Outlines of the Architecture Used in the Project</h3>
-<img src="Sources/Images/microservicearch.PNG">
+<img src="Sources/Images/microserviceArch.PNG">
 
 <h3>5. Setup</h3>
 <ul>
