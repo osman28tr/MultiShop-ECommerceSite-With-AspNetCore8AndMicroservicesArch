@@ -1,4 +1,12 @@
+using Microsoft.Extensions.Options;
 using MultiShop.Comment.Extensions;
+using MultiShop.Comment.Repositories;
+using MultiShop.Comment.Repositories.Abstract;
+using MultiShop.Comment.Services;
+using MultiShop.Comment.Services.Abstract;
+using Newtonsoft.Json;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +14,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddElastic(builder.Configuration);
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+builder.Services.AddScoped<IReviewService, ReviewService>();
+//ignore reference loop
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

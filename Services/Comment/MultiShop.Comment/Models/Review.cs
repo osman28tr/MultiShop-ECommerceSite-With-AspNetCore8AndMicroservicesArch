@@ -1,4 +1,6 @@
 ﻿using System.Text.Json.Serialization;
+using MultiShop.Comment.ViewModels.ReviewViewModels;
+using Newtonsoft.Json.Converters;
 
 namespace MultiShop.Comment.Models
 {
@@ -12,21 +14,50 @@ namespace MultiShop.Comment.Models
         public byte Rating { get; set; }
         [JsonPropertyName("status")]
         public bool Status { get; set; }
-        [JsonPropertyName("user")]
-        public UserModel User { get; set; }
-    }
+        //formatted datetime as DD-MM-YYYY
+        [JsonPropertyName("created_date")]
+        public DateTime CreatedDate { get; set; }
+        [JsonPropertyName("user_id")]
+        public string UserId { get; set; }
+        [JsonPropertyName("user_name")]
+        public string UserName { get; set; }
+        [JsonPropertyName("user_surname")]
+        public string UserSurname { get; set; }
+        [JsonPropertyName("user_email")]
+        public string UserEmail { get; set; }
+        [JsonPropertyName("user_image")]
+        public string UserImage { get; set; }
 
-    public class UserModel
-    {
-        [JsonPropertyName("_id")]
-        public string Id { get; set; }
-        [JsonPropertyName("name")]
-        public string Name { get; set; }
-        [JsonPropertyName("surname")]
-        public string Surname { get; set; }
-        [JsonPropertyName("email")]
-        public string Email { get; set; }
-        [JsonPropertyName("image")]
-        public string Image { get; set; }
+        public ResultReviewViewModel ConvertToResultReviewViewModel()
+        {
+            return new ResultReviewViewModel
+            {
+                Id = Id,
+                Content = Content,
+                Rating = Rating,
+                Status = Status,
+                UserId = UserId,
+                UserName = UserName,
+                UserSurname = UserSurname,
+                UserEmail = UserEmail,
+                UserImage = UserImage
+            };
+        }
+
+        public GetByIdReviewViewModel ConvertToGetByIdReviewViewModel()
+        {
+            return new GetByIdReviewViewModel
+            {
+                Id = Id,
+                Content = Content,
+                Rating = Rating,
+                Status = Status,
+                UserId = UserId,
+                UserName = UserName,
+                UserSurname = UserSurname,
+                UserEmail = UserEmail,
+                UserImage = UserImage
+            };
+        }
     }
 }

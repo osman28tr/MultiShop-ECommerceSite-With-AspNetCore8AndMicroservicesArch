@@ -1,5 +1,9 @@
 ﻿using Elastic.Clients.Elasticsearch;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
+using Elasticsearch.Net;
+using MultiShop.Comment.Models;
+using Nest;
 
 namespace MultiShop.Comment.Extensions
 {
@@ -7,13 +11,16 @@ namespace MultiShop.Comment.Extensions
     {
         public static void AddElastic(this IServiceCollection services, IConfiguration configuration)
         {
-            var url = configuration["ElasticSearchDb:Url"]!;
+            var settings =
+                new ElasticsearchClientSettings(
+                    new SingleNodePool(new Uri(configuration.GetSection("ElasticSearchDb")["Url"]!)));
+            var client = new ElasticsearchClient(settings);
 
-            var settings = new ElasticsearchClientSettings(new SingleNodePool(new Uri(url)));
+            var nestClient = new ElasticClient(new ConnectionSettings(
+                new SingleNodeConnectionPool(new Uri(configuration.GetSection("ElasticSearchDb")["Url"]!))));
 
-            var elasticSearchClient = new ElasticsearchClient(settings);
-
-            services.AddSingleton(elasticSearchClient);
+            services.AddSingleton(client);
+            services.AddSingleton(nestClient);
         }
     }
 }
