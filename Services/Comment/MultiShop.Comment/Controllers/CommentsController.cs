@@ -33,6 +33,14 @@ namespace MultiShop.Comment.Controllers
             return Ok(result);
         }
 
+        [HttpGet("GetListByProduct/{productId}")]
+        public async Task<IActionResult> GetListByProduct(string productId)
+        {
+            var result = await _reviewService.GetAllByProductAsync(productId);
+            if(result == null)
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            return Ok(result);
+        }
         [HttpPost]
         public async Task<IActionResult> Save(CreatedReviewViewModel createdReviewViewModel)
         {

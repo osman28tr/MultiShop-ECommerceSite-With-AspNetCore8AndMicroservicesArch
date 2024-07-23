@@ -30,6 +30,16 @@ namespace MultiShop.Comment.Repositories
             return result.Documents.Select(x => x.ConvertToResultReviewViewModel()).ToList();
         }
 
+        public async Task<IReadOnlyCollection<ResultReviewViewModel>> GetAllByProductAsync(string productId)
+        {
+            var result = await _elasticClient.SearchAsync<Review>(x => x.Index(_reviewIndexName)
+                           .Query(q => q.Term(t => t.Field(f => f.ProductId).Value(productId))));
+
+            foreach (var hit in result.Hits) hit.Source.Id = hit.Id;
+
+            return result.Documents.Select(x => x.ConvertToResultReviewViewModel()).ToList();
+        }
+
         public Task<IReadOnlyCollection<ResultReviewViewModel>> SearchAsync(string searchText)
         {
             throw new NotImplementedException();

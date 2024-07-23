@@ -10,6 +10,7 @@ namespace MultiShop.Comment.ViewModels.ReviewViewModels
         [JsonPropertyName("created_date")]
         public DateTime CreatedDate { get; set; }
         public bool Status { get; set; }
+        public string ProductId { get; set; }
         public UserModel User { get; set; }
 
         public Review ConvertToReviewModel()
@@ -20,6 +21,7 @@ namespace MultiShop.Comment.ViewModels.ReviewViewModels
                 Rating = Rating,
                 Status = Status,
                 CreatedDate = DateTime.Now,
+                ProductId = ProductId,
                 User = new UserModel()
                 {
                     Id = User.Id,

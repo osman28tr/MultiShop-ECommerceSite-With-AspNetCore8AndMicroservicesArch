@@ -12,6 +12,7 @@ namespace MultiShop.DtoLayer.CommentDtos
         public byte Rating { get; set; }
         public bool Status { get; set; }
         public DateTime CreatedDate { get; set; }
+        public string ProductId { get; set; }
         public UserReviewDto User { get; set; }
     }
 }
