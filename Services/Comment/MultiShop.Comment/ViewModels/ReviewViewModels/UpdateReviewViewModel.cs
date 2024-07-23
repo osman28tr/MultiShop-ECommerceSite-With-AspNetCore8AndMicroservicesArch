@@ -9,11 +9,7 @@ namespace MultiShop.Comment.ViewModels.ReviewViewModels
         public byte Rating { get; set; }
         public bool Status { get; set; }
         public DateTime CreatedDate { get; set; }
-        public string UserId { get; set; }
-        public string UserName { get; set; }
-        public string UserSurname { get; set; }
-        public string UserEmail { get; set; }
-        public string UserImage { get; set; }
+        public UserModel User { get; set; }
 
         public Review ConvertToReviewModel()
         {
@@ -23,11 +19,14 @@ namespace MultiShop.Comment.ViewModels.ReviewViewModels
                 Content = Content,
                 Rating = Rating,
                 Status = Status,
-                UserId = UserId,
-                UserName = UserName,
-                UserSurname = UserSurname,
-                UserEmail = UserEmail,
-                UserImage = UserImage
+                User = new UserModel()
+                {
+                    Id = User.Id,
+                    Name = User.Name,
+                    Surname = User.Surname,
+                    Email = User.Email,
+                    Image = User.Image
+                }
             };
         }
     }

@@ -41,10 +41,12 @@ namespace MultiShop.Comment.Repositories
                 (_reviewIndexName));
             if (!response.IsSuccess())
                 return null;
-
-            response.Source.Id = response.Id;
-
-            return response.Source.ConvertToGetByIdReviewViewModel();
+            if (response != null)
+            {
+                response.Source.Id = response.Id;
+                return response.Source.ConvertToGetByIdReviewViewModel();
+            }
+            return null;
         }
 
         public async Task<ResultReviewViewModel> SaveAsync(CreatedReviewViewModel createdReviewViewModel)

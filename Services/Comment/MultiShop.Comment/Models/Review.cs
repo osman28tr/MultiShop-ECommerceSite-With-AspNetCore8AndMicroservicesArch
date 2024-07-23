@@ -14,20 +14,10 @@ namespace MultiShop.Comment.Models
         public byte Rating { get; set; }
         [JsonPropertyName("status")]
         public bool Status { get; set; }
-        //formatted datetime as DD-MM-YYYY
         [JsonPropertyName("created_date")]
         public DateTime CreatedDate { get; set; }
-        [JsonPropertyName("user_id")]
-        public string UserId { get; set; }
-        [JsonPropertyName("user_name")]
-        public string UserName { get; set; }
-        [JsonPropertyName("user_surname")]
-        public string UserSurname { get; set; }
-        [JsonPropertyName("user_email")]
-        public string UserEmail { get; set; }
-        [JsonPropertyName("user_image")]
-        public string UserImage { get; set; }
-
+        [JsonPropertyName("user")]
+        public UserModel User { get; set; }
         public ResultReviewViewModel ConvertToResultReviewViewModel()
         {
             return new ResultReviewViewModel
@@ -36,11 +26,14 @@ namespace MultiShop.Comment.Models
                 Content = Content,
                 Rating = Rating,
                 Status = Status,
-                UserId = UserId,
-                UserName = UserName,
-                UserSurname = UserSurname,
-                UserEmail = UserEmail,
-                UserImage = UserImage
+                User = new UserModel()
+                {
+                    Id = User.Id,
+                    Name = User.Name,
+                    Surname = User.Surname,
+                    Email = User.Email,
+                    Image = User.Image
+                }
             };
         }
 
@@ -52,12 +45,29 @@ namespace MultiShop.Comment.Models
                 Content = Content,
                 Rating = Rating,
                 Status = Status,
-                UserId = UserId,
-                UserName = UserName,
-                UserSurname = UserSurname,
-                UserEmail = UserEmail,
-                UserImage = UserImage
+                User = new UserModel()
+                {
+                    Id = User.Id,
+                    Name = User.Name,
+                    Surname = User.Surname,
+                    Email = User.Email,
+                    Image = User.Image
+                }
             };
         }
+    }
+
+    public class UserModel
+    {
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+        [JsonPropertyName("surname")]
+        public string Surname { get; set; }
+        [JsonPropertyName("email")]
+        public string Email { get; set; }
+        [JsonPropertyName("image")]
+        public string Image { get; set; }
     }
 }
