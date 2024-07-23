@@ -5,7 +5,7 @@
 </p>
 
 <h3>2. Used Technologies</h3>
-<p align="justify">Asp.Net Core 8.0 API, Asp.Net Core 8.0 Mvc, Entityframework Core, MSSQL, MongoDb, Docker, DockerCompose, Automapper, Redis, IdentityServer, Generic Repository Design Pattern, CQRS Design Pattern, Mediator, Onion Architecture, Microservices Architecture</p>
+<p align="justify">Asp.Net Core 8.0 API, Asp.Net Core 8.0 Mvc, Entityframework Core, MSSQL, MongoDb, ElasticSearchDb, Kibana, Nest and Elastic.Clients Library, Docker, DockerCompose, Automapper, Redis, IdentityServer, Generic Repository Design Pattern, CQRS Design Pattern, Mediator, Onion Architecture, Microservices Architecture</p>
 
 <h3>3. Language and Development Environment Used: C# - .Net 8.0</h3>
 
