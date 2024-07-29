@@ -1,0 +1,77 @@
+﻿@model CreateReviewDto
+<head>
+    <style>
+        .rating .fa-star {
+            cursor: pointer;
+        }
+            .rating .fa-star.checked {
+                color: gold;
+            }
+    </style>
+</head>
+<body>
+    <div class="col-md-6">
+        <h4 class="mb-4">Bir Yorum Bırakın</h4>
+        <small>Yorumunuzun alınması için geçerli bir email adresi giriniz. *</small>
+        <div class="d-flex my-3">
+            <p class="mb-0 mr-2">Ürün Puanınız * :</p>
+            <div class="text-primary rating">
+                <i class="far fa-star" data-value="1"></i>
+                <i class="far fa-star" data-value="2"></i>
+                <i class="far fa-star" data-value="3"></i>
+                <i class="far fa-star" data-value="4"></i>
+                <i class="far fa-star" data-value="5"></i>
+            </div>
+        </div>
+        <form method="post" asp-action="AddComment" asp-controller="Product">
+            <div class="form-group">
+                <input type="text" asp-for="product_id" hidden />
+            </div>
+            <input type="hidden" id="ratingValue" asp-for="Rating" value="0">
+            <div class="form-group">
+                <label for="message">Yorumunuz *</label>
+                <textarea id="message" cols="30" rows="5" asp-for="Content" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="name">Adınız *</label>
+                <input type="text" class="form-control" id="name" asp-for="User.Name">
+            </div>
+            <div class="form-group">
+                <label for="name">Soyadınız *</label>
+                <input type="text" class="form-control" id="name" asp-for="User.Surname">
+            </div>
+            <div class="form-group">
+                <label for="email">Email adresiniz *</label>
+                <input type="email" class="form-control" id="email" asp-for="User.Email">
+            </div>
+            <div class="form-group mb-0">
+                <input type="submit" value="Yorum yap" class="btn btn-primary px-3">
+            </div>
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const stars = document.querySelectorAll('.rating .fa-star');
+            const ratingValue = document.getElementById('ratingValue');
+
+            stars.forEach(star => {
+                star.addEventListener('click', function () {
+                    let value = this.getAttribute('data-value');
+                    ratingValue.value = value;
+
+                    stars.forEach(s => {
+                        if (s.getAttribute('data-value') <= value) {
+                            s.classList.add('checked');
+                            s.classList.remove('far');
+                            s.classList.add('fas');
+                        } else {
+                            s.classList.remove('checked');
+                            s.classList.remove('fas');
+                            s.classList.add('far');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>

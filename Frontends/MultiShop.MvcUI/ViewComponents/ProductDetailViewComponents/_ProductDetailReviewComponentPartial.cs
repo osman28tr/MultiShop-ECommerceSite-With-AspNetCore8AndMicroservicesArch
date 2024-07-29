@@ -20,6 +20,7 @@ namespace MultiShop.MvcUI.ViewComponents.ProductDetailViewComponents
         public async Task<IViewComponentResult> InvokeAsync(string productId)
         {
             var responseMessage = await _httpClient.GetAsync(_commentUrl + $"/GetListByProduct/{productId}");
+            ViewBag.Id = productId;
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
