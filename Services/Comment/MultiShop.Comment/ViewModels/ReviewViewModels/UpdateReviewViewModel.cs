@@ -1,4 +1,5 @@
-﻿using MultiShop.Comment.Models;
+﻿using System.Text.Json.Serialization;
+using MultiShop.Comment.Models;
 
 namespace MultiShop.Comment.ViewModels.ReviewViewModels
 {
@@ -8,8 +9,8 @@ namespace MultiShop.Comment.ViewModels.ReviewViewModels
         public string Content { get; set; }
         public byte Rating { get; set; }
         public bool Status { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public string ProductId { get; set; }
+        public DateTime created_date { get; set; }
+        public string product_id { get; set; }
         public UserModel User { get; set; }
 
         public Review ConvertToReviewModel()
@@ -20,6 +21,7 @@ namespace MultiShop.Comment.ViewModels.ReviewViewModels
                 Content = Content,
                 Rating = Rating,
                 Status = Status,
+                ProductId = product_id,
                 User = new UserModel()
                 {
                     Id = User.Id,

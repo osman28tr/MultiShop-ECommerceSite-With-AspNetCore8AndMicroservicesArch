@@ -7,6 +7,7 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using Elastic.Clients.Elasticsearch;
 using Nest;
+using Review = MultiShop.Comment.Models.Review;
 
 namespace MultiShop.Comment.Repositories
 {
@@ -61,7 +62,7 @@ namespace MultiShop.Comment.Repositories
 
         public async Task<ResultReviewViewModel> SaveAsync(CreatedReviewViewModel createdReviewViewModel)
         {
-            createdReviewViewModel.CreatedDate = DateTime.Now;
+            createdReviewViewModel.created_date = DateTime.Now;
             var review = createdReviewViewModel.ConvertToReviewModel();
             var response =
                 await _elasticClient.IndexAsync(review, x => x.Index(_reviewIndexName).Id(Guid.NewGuid().ToString()));
@@ -74,6 +75,7 @@ namespace MultiShop.Comment.Repositories
 
         public async Task<bool> UpdateAsync(UpdateReviewViewModel updateReviewViewModel)
         {
+            var review = updateReviewViewModel.ConvertToReviewModel();
             var response = await _elasticNestClient.UpdateAsync<Review, UpdateReviewViewModel
             >(updateReviewViewModel.Id, x => x
                 .Index(_reviewIndexName)
