@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MultiShop.Comment.Services.Abstract;
 using MultiShop.Comment.ViewModels.ReviewViewModels;
@@ -33,6 +34,14 @@ namespace MultiShop.Comment.Controllers
             return Ok(result);
         }
 
+        [HttpGet("GetListByProduct/{productId}")]
+        public async Task<IActionResult> GetListByProduct(string productId)
+        {
+            var result = await _reviewService.GetAllByProductAsync(productId);
+            if(result == null)
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            return Ok(result);
+        }
         [HttpPost]
         public async Task<IActionResult> Save(CreatedReviewViewModel createdReviewViewModel)
         {
@@ -60,10 +69,10 @@ namespace MultiShop.Comment.Controllers
             return Ok(result);
         }
 
-        [HttpGet("search")]
-        public async Task<IActionResult> Search(string searchText)
+        [HttpPost("Search")]
+        public async Task<IActionResult> Search(SearchViewModel searchViewModel)
         {
-            var result = await _reviewService.SearchAsync(searchText);
+            var result = await _reviewService.SearchAsync(searchViewModel);
             return Ok(result);
         }
     }

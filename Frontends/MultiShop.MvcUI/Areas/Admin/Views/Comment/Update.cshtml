@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@model UpdateReviewDto
+<section class="content container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+                <h4>Yorum Güncelleme Sayfası</h4>
+                <div class="bs-example" data-example-id="bordered-table">
+                    <form method="post">
+                        <label>Yorum Id</label>
+                        <input type="text" asp-for="Id" readonly class="form-control" />
+                        <br />
+                        <label>Yorum</label>
+                        <input type="text" asp-for="Content" readonly class="form-control" />
+                        <br />
+                        <label>Puan</label>
+                        <input type="text" asp-for="Rating" readonly class="form-control" />
+                        <br />
+                        <label>Durum</label>
+                        <input type="checkbox" asp-for="Status" class="form-control" />
+                        <br />
+                        <label>Kullanıcı Id</label>
+                        <input type="text" asp-for="User.Id" readonly class="form-control" />
+                        <br />
+                        <label>Kullanıcı İsim</label>
+                        <input type="text" asp-for="User.Name" readonly class="form-control" />
+                        <br />
+                        <label>Kullanıcı Soyisim</label>
+                        <input type="text" asp-for="User.Surname" readonly class="form-control" />
+                        <br />
+                        <label>Kullanıcı Email</label>
+                        <input type="text" asp-for="User.Email" readonly class="form-control" />
+                        <br />
+                        <label>Kullanıcı Resim</label>
+                        <input type="text" asp-for="User.Image" readonly class="form-control" />
+                        <br />
+                        <button class="btn btn-primary">Yorum güncelle</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
