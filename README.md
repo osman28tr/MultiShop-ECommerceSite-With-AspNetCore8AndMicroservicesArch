@@ -12,7 +12,27 @@
 <h3>4. General Outlines of the Architecture Used in the Project</h3>
 <img src="Sources/Images/microserviceArch.PNG">
 
-<h3>5. Setup</h3>
+<h3>5. Screenshots</h3>
+<h4>Anasayfa</h4>
+<img src="Sources/Images/screenshot1.PNG">
+<img src="Sources/Images/screenshot2.PNG">
+<img src="Sources/Images/screenshot3.PNG">
+<img src="Sources/Images/screenshot4.PNG">
+<h4>Ürünler</h4>
+<img src="Sources/Images/screenshot5.PNG">
+<h4>İletişim</h4>
+<img src="Sources/Images/screenshot6.PNG">
+<h4>Kayıt Ol</h4>
+<img src="Sources/Images/screenshot7.PNG">
+<h4>Giriş Yap</h4>
+<img src="Sources/Images/screenshot8.PNG">
+<h4>Sepet</h4>
+<img src="Sources/Images/screenshot9.PNG">
+<h4>Admin</h4>
+<img src="Sources/Images/screenshot10.PNG">
+
+
+<h3>6. Setup</h3>
 <ul>
     <li>If Docker is not installed on your computer, download and install it.</li>
     <li>
