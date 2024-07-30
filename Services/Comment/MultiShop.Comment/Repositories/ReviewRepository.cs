@@ -59,12 +59,10 @@ namespace MultiShop.Comment.Repositories
 
 			Action<QueryDescriptor<Review>> statusTerm = (q) => q.Term(t => t.Field(f => f.Status).Value(searchViewModel.Status));
 
-			Action<QueryDescriptor<Review>> productTerm = (q) => q.Term(t => t.Field(f => f.ProductId).Value(searchViewModel.ProductId));
-
 			Action<QueryDescriptor<Review>> usernameTerm = (q) =>
 				q.Term(t => t.Field(f => f.User.Name).Value(searchViewModel.UserName));
 
-			if (string.IsNullOrEmpty(searchViewModel.Content) && searchViewModel.Rating == 0 && string.IsNullOrEmpty(searchViewModel.ProductId) && searchViewModel.Status == false && string.IsNullOrEmpty(searchViewModel.UserName))
+			if (string.IsNullOrEmpty(searchViewModel.Content) && searchViewModel.Rating == 0 && searchViewModel.Status == false && string.IsNullOrEmpty(searchViewModel.UserName))
 			{
 				ListQuery.Add(matchAll);
 			}
@@ -74,8 +72,6 @@ namespace MultiShop.Comment.Repositories
 					ListQuery.Add(matchContent);
 				if(searchViewModel.Rating != 0)
 					ListQuery.Add(ratingTerm);
-				if(!string.IsNullOrEmpty(searchViewModel.ProductId))
-					ListQuery.Add(productTerm);
 				if (searchViewModel.Status)
 					ListQuery.Add(statusTerm);
 				if (!string.IsNullOrEmpty(searchViewModel.UserName))

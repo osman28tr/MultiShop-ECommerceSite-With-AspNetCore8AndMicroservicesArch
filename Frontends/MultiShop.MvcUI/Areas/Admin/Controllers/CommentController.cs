@@ -43,7 +43,6 @@ namespace MultiShop.MvcUI.Areas.Admin.Controllers
         {
             var jsonData = JsonConvert.SerializeObject(searchCommentModel);
             var stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            searchCommentModel.ProductId = null;
             var responseMessage = await _httpClient.PostAsync(_commentUrl + "/Search", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
