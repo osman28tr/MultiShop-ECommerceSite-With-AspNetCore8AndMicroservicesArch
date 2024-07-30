@@ -6,7 +6,7 @@ namespace MultiShop.Comment.Repositories.Abstract
     {
         Task<IReadOnlyCollection<ResultReviewViewModel>> GetAllAsync();
         Task<IReadOnlyCollection<ResultReviewViewModel>> GetAllByProductAsync(string productId);
-        Task<IReadOnlyCollection<ResultReviewViewModel>> SearchAsync(string searchText);
+        Task<IReadOnlyCollection<ResultReviewViewModel>> SearchAsync(SearchViewModel searchViewModel);
         Task<GetByIdReviewViewModel> GetByIdAsync(string id);
         Task<ResultReviewViewModel> SaveAsync(CreatedReviewViewModel createdReviewViewModel);
         Task<bool> UpdateAsync(UpdateReviewViewModel updateReviewViewModel);

@@ -69,10 +69,10 @@ namespace MultiShop.Comment.Controllers
             return Ok(result);
         }
 
-        [HttpGet("search")]
-        public async Task<IActionResult> Search(string searchText)
+        [HttpPost("Search")]
+        public async Task<IActionResult> Search(SearchViewModel searchViewModel)
         {
-            var result = await _reviewService.SearchAsync(searchText);
+            var result = await _reviewService.SearchAsync(searchViewModel);
             return Ok(result);
         }
     }

@@ -22,9 +22,9 @@ namespace MultiShop.Comment.Services
             return await _reviewRepository.GetAllByProductAsync(productId);
         }
 
-        public async Task<IReadOnlyCollection<ResultReviewViewModel>> SearchAsync(string searchText)
+        public async Task<IReadOnlyCollection<ResultReviewViewModel>> SearchAsync(SearchViewModel searchViewModel)
         {
-            return await _reviewRepository.SearchAsync(searchText);
+	        return await _reviewRepository.SearchAsync(searchViewModel);
         }
 
         public async Task<GetByIdReviewViewModel> GetByIdAsync(string id)
