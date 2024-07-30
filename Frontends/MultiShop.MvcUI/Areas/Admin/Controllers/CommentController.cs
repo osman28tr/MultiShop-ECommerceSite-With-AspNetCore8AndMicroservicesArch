@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using MultiShop.DtoLayer.CommentDtos;
+using MultiShop.MvcUI.Areas.Admin.Models;
 using Newtonsoft.Json;
 
 namespace MultiShop.MvcUI.Areas.Admin.Controllers
@@ -20,6 +21,7 @@ namespace MultiShop.MvcUI.Areas.Admin.Controllers
             _commentUrl = Configuration["CommentUrl"]!;
         }
         [Route("Index")]
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             ViewBag.v1 = "Anasayfa";
@@ -31,6 +33,22 @@ namespace MultiShop.MvcUI.Areas.Admin.Controllers
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<List<ResultReviewDto>>(jsonData);
+                return View(values);
+            }
+            return View();
+        }
+        [Route("Index")]
+        [HttpPost]
+        public async Task<IActionResult> Index(SearchCommentModel searchCommentModel)
+        {
+            var jsonData = JsonConvert.SerializeObject(searchCommentModel);
+            var stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            searchCommentModel.ProductId = null;
+            var responseMessage = await _httpClient.PostAsync(_commentUrl + "/Search", stringContent);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var responseJsonData = await responseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<List<ResultReviewDto>>(responseJsonData);
                 return View(values);
             }
             return View();

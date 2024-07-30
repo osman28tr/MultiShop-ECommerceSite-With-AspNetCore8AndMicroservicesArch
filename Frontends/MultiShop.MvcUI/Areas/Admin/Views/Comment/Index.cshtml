@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
@@ -13,6 +12,59 @@
             <div class="chart-box">
                 <h4>Yorum Listesi</h4>
                 <p>Yorumlar ile ilgili işlemlerinizi aşağıdaki tablo üzerinden gerçekleştirebilirsiniz.</p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="box box-primary">
+                            <div class="box-header
+                                with-border">
+                                <h3 class="box-title">Filtreleme</h3>
+                            </div>
+                            <div class="box-body">
+                                <form asp-action="Index" asp-controller="Comment" method="post">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group
+                                                has-feedback">
+                                                <label>Yorum İçeriği</label>
+                                                <input type="text" class="form-control" name="content" value="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group
+                                                has-feedback">
+                                                <label>Puan</label>
+                                                <input type="number" class="form-control" name="rating" value="0">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group
+                                                has-feedback">
+                                                <label>Durum</label>
+                                                <select class="form-control" name="Status">
+                                                    <option value="false">Pasif</option>
+                                                    <option value="true">Aktif</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group
+                                                has-feedback">
+                                                <label>Kullanıcı İsmi</label>
+                                                <input type="text" class="form-control" name="userName" value="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn btn-primary">Filtrele</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
                 <div class="bs-example" data-example-id="bordered-table">
                     <table class="table table-bordered">
                         <thead>
@@ -31,6 +83,14 @@
                             </tr>
                         </thead>
                         <tbody>
+                        @if (Model == null)
+                        {
+                            <tr>
+                                <td colspan="11">Henüz yorum eklenmemiştir.</td>
+                            </tr>
+                        }
+                        else
+                        {
                             @foreach (var item in Model)
                             {
                                 count++;
@@ -48,6 +108,7 @@
                                     <td><a href="/Admin/Comment/Update/@item.Id" class="btn btn-info">Güncelle</a></td>
                                 </tr>
                             }
+                        }
                         </tbody>
                     </table>
                 </div>
