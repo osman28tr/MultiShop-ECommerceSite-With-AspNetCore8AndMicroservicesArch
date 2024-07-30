@@ -12,7 +12,28 @@
 <h3>4. Projede Kullanılan Mimarinin Genel Hatları</h3>
 <img src="Sources/Images/microserviceArch.PNG">
 
-<h3>5. Kurulum</h3>
+<h3>5. Ekran Görüntüleri</h3>
+<h4>Anasayfa</h4>
+<img src="Sources/Images/screenshot1.PNG">
+<img src="Sources/Images/screenshot2.PNG">
+<img src="Sources/Images/screenshot3.PNG">
+<img src="Sources/Images/screenshot4.PNG">
+<h4>Ürünler</h4>
+<img src="Sources/Images/screenshot5.PNG">
+<h4>Ürün Detay(Geliştirilme aşamasında)</h4>
+<img src="Sources/Images/screenshot11.PNG">
+<h4>İletişim</h4>
+<img src="Sources/Images/screenshot6.PNG">
+<h4>Kayıt Ol</h4>
+<img src="Sources/Images/screenshot7.PNG">
+<h4>Giriş Yap</h4>
+<img src="Sources/Images/screenshot8.PNG">
+<h4>Sepet</h4>
+<img src="Sources/Images/screenshot9.PNG">
+<h4>Admin</h4>
+<img src="Sources/Images/screenshot10.PNG">
+
+<h3>6. Kurulum</h3>
 <ul>
     <li>Docker bilgisayarınızda kurulu değilse, indirip kurunuz.</li>
     <li>

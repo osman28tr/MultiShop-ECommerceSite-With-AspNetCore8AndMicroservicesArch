@@ -13,20 +13,22 @@
 <img src="Sources/Images/microserviceArch.PNG">
 
 <h3>5. Screenshots</h3>
-<h4>Anasayfa</h4>
+<h4>Home Page</h4>
 <img src="Sources/Images/screenshot1.PNG">
 <img src="Sources/Images/screenshot2.PNG">
 <img src="Sources/Images/screenshot3.PNG">
 <img src="Sources/Images/screenshot4.PNG">
-<h4>Ürünler</h4>
+<h4>Products</h4>
 <img src="Sources/Images/screenshot5.PNG">
-<h4>İletişim</h4>
+<h4>Product Detail(Under development)</h4>
+<img src="Sources/Images/screenshot11.PNG">
+<h4>Contact</h4>
 <img src="Sources/Images/screenshot6.PNG">
-<h4>Kayıt Ol</h4>
+<h4>Register</h4>
 <img src="Sources/Images/screenshot7.PNG">
-<h4>Giriş Yap</h4>
+<h4>Login</h4>
 <img src="Sources/Images/screenshot8.PNG">
-<h4>Sepet</h4>
+<h4>Basket</h4>
 <img src="Sources/Images/screenshot9.PNG">
 <h4>Admin</h4>
 <img src="Sources/Images/screenshot10.PNG">
