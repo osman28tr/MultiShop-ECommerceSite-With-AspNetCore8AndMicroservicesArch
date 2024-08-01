@@ -44,4 +44,4 @@ Komut girildikten sonra projemizdeki tüm veritabanları docker container ile be
 <li>Daha sonra "multiple startup projects" bölümüne giderek projemizdeki mikroservisleri start durumuna getiriniz ve ardından start butonuna basarak projeyi çalıştırınız.</li>
 </ul>
 
-<b>Note: </b>Proje geliştirilme aşamasındadır.
+<b>Not: </b>Proje geliştirilme aşamasındadır.
