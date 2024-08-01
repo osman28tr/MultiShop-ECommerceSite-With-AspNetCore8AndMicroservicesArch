@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using MultiShop.DtoLayer.IdentityDtos;
 using MultiShop.MvcUI.Models;
+using MultiShop.MvcUI.Services.Abstract;
 using Newtonsoft.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
@@ -17,9 +18,11 @@ namespace MultiShop.MvcUI.Controllers
 		private readonly IHttpClientFactory _httpClientFactory;
 		private readonly HttpClient _httpClient;
 		private readonly string _identityUrl;
-		public LoginController(IHttpClientFactory httpClientFactory)
+		private readonly ILoginService _loginService;
+		public LoginController(IHttpClientFactory httpClientFactory, ILoginService loginService)
 		{
 			_httpClientFactory = httpClientFactory;
+			_loginService = loginService;
 			_httpClient = _httpClientFactory.CreateClient();
 			IConfiguration Configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 			_identityUrl = Configuration["IdentityUrl"]!;
@@ -37,6 +40,7 @@ namespace MultiShop.MvcUI.Controllers
 			var responseMessage = await _httpClient.PostAsync(_identityUrl + "/api/Logins", stringContent);
 			if (responseMessage.IsSuccessStatusCode)
 			{
+				
 				var jsonData = await responseMessage.Content.ReadAsStringAsync();
 				var tokenModel = JsonSerializer.Deserialize<JwtResponseModel>(jsonData, new JsonSerializerOptions()
 				{
@@ -56,6 +60,9 @@ namespace MultiShop.MvcUI.Controllers
 							{ ExpiresUtc = tokenModel.ExpiredDate, IsPersistent = true };
 						await HttpContext.SignInAsync(JwtBearerDefaults.AuthenticationScheme,
 							new ClaimsPrincipal(claimsIdentity), authProps);
+						// end nameidentifier word is user id
+						var id = claims.FirstOrDefault(c =>
+							c.Type.EndsWith("nameidentifier", StringComparison.OrdinalIgnoreCase)).Value;
 						return RedirectToAction("Index", "Default");
 					}
 				}

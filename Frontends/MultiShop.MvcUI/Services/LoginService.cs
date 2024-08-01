@@ -5,16 +5,11 @@ namespace MultiShop.MvcUI.Services
 {
 	public class LoginService : ILoginService
 	{
-		private readonly IHttpContextAccessor _httpContextAccessor;
-		public LoginService(IHttpContextAccessor httpContextAccessor)
+		private readonly IHttpContextAccessor _contextAccessor;
+		public LoginService(IHttpContextAccessor contextAccessor)
 		{
-			_httpContextAccessor = httpContextAccessor;
+			_contextAccessor = contextAccessor;
 		}
-		private string getUserId;
-		public string GetUserId
-		{
-			get { return getUserId; }
-			set { getUserId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value; }
-		}
+		public string GetUserId => _contextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier).Value;
 	}
 }
