@@ -1,4 +1,5 @@
-﻿@{
+﻿@model CreateLoginDto
+@{
     Layout = null;
 }
 <!DOCTYPE html>
@@ -27,22 +28,22 @@
 					<a href="/Register/Index/" class="account">Kayıt Ol</a>
 				</div>
 			</div>
-			<form class="form-detail" asp-action="Index" asp-controller="Register" method="post">
+			<form class="form-detail" asp-action="Index" asp-controller="Login" method="post">
 				<h2>Multishop Kullanıcı Giriş Formu</h2>
 				<div class="form-group">
 					<div class="form-row form-row-1">
 						<label for="last_name">Kullanıcı Adınız</label>
-						<input type="text" class="input-text" required>
+						<input type="text" asp-for="UserName" class="input-text" required>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="form-row form-row-1 ">
 						<label for="password">Şifre</label>
-						<input type="password" class="input-text" required>
+						<input type="password" asp-for="Password" class="input-text" required>
 					</div>
 				</div>
 				<div class="form-row-last">
-					<input type="submit" name="register" class="register" value="Giriş Yap">
+					<input type="submit" name="login" class="register" value="Giriş Yap">
 				</div>
 			</form>
 		</div>
