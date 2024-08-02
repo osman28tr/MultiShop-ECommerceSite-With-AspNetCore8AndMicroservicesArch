@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Mvc;
 using MultiShop.DtoLayer.CatalogDtos.CategoryDtos;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -38,6 +39,8 @@ namespace MultiShop.MvcUI.Controllers
                 var tokenReponse = JObject.Parse(content);
                 token = tokenReponse["access_token"].Value<string>();
             }
+
+			_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
 			var responseMessage = await _httpClient.GetAsync(_catalogCategoryUrl);
 			if (responseMessage.IsSuccessStatusCode)
