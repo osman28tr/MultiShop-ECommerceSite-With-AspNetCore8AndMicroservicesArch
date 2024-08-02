@@ -43,3 +43,5 @@ Komut girildikten sonra projemizdeki tüm veritabanları docker container ile be
 <li>Daha sonra terminalde MultiShop.Order.Persistance katmanını açınız ve "update-database" komutunu giriniz. Bu sayede order veritabanı ile ilgili tablolar veritabanına yansıyacaktır.</li>
 <li>Daha sonra "multiple startup projects" bölümüne giderek projemizdeki mikroservisleri start durumuna getiriniz ve ardından start butonuna basarak projeyi çalıştırınız.</li>
 </ul>
+
+<b>Not: </b>Proje geliştirilme aşamasındadır.
