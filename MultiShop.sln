@@ -37,6 +37,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiShop.IdentityServer", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EC0338B7-6630-45DE-94CA-84153BCA7C4E}"
 	ProjectSection(SolutionItems) = preProject
+		OcelotCodeExample.txt = OcelotCodeExample.txt
 		Ports.txt = Ports.txt
 	EndProjectSection
 EndProject
