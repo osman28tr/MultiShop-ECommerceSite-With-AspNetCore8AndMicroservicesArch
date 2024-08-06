@@ -13,6 +13,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddAuthentication().AddJwtBearer("OcelotAuthenticationScheme", opt =>
+{
+    opt.Authority = builder.Configuration["IdentityServerUrl"];
+    opt.Audience = "MultiShopComment";
+    opt.RequireHttpsMetadata = false;
+});
 builder.Services.AddElastic(builder.Configuration);
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
