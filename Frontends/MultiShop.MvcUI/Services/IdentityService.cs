@@ -16,15 +16,18 @@ namespace MultiShop.MvcUI.Services
         private readonly HttpClient _httpClient;
         private readonly string _identityUrl;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly ServiceApiSetting _serviceApiSetting;
         private readonly ClientSetting _clientSetting;
 
-        public IdentityService(IOptions<ClientSetting> clientSetting, IHttpContextAccessor httpContextAccessor,IHttpClientFactory httpClientFactory)
+        public IdentityService(IOptions<ClientSetting> clientSetting, IHttpContextAccessor httpContextAccessor,IHttpClientFactory httpClientFactory, IOptions<ServiceApiSetting> serviceApiSetting)
         {
             _clientSetting = clientSetting.Value;
             _httpContextAccessor = httpContextAccessor;
             _httpClientFactory = httpClientFactory;
+            _serviceApiSetting = serviceApiSetting.Value;
             IConfiguration configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
             _identityUrl = configuration["IdentityUrl"]!;
+            _serviceApiSetting.IdentityUrl = _identityUrl;
             _httpClient = _httpClientFactory.CreateClient();
         }
 
@@ -86,6 +89,60 @@ namespace MultiShop.MvcUI.Services
             
             await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                 claimsPrincipal, authenticationProperties);
+            return true;
+        }
+
+        public async Task<bool> GetRefreshToken()
+        {
+            var discoveryEndPoint = await _httpClient.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest()
+            {
+                Address = _identityUrl,
+                Policy = new DiscoveryPolicy()
+                {
+                    RequireHttps = false
+                }
+            }); // get identityserver4 endpoints
+            var refreshToken =
+                await _httpContextAccessor.HttpContext.GetTokenAsync(OpenIdConnectParameterNames.RefreshToken);
+
+            var refreshTokenRequest = new RefreshTokenRequest()
+            {
+                ClientId = _clientSetting.MultiShopManagerClient.ClientId,
+                ClientSecret = _clientSetting.MultiShopManagerClient.ClientSecret,
+                RefreshToken = refreshToken,
+                Address = discoveryEndPoint.TokenEndpoint
+            };
+
+            var token = await _httpClient.RequestRefreshTokenAsync(refreshTokenRequest);
+
+            var authenticationToken = new List<AuthenticationToken>()
+            {
+                new AuthenticationToken()
+                {
+                    Name = OpenIdConnectParameterNames.AccessToken,
+                    Value = token.AccessToken
+                },
+                new AuthenticationToken()
+                {
+                    Name = OpenIdConnectParameterNames.RefreshToken,
+                    Value = token.RefreshToken
+                },
+                new AuthenticationToken()
+                {
+                    Name = OpenIdConnectParameterNames.ExpiresIn,
+                    Value = DateTime.UtcNow.AddMinutes(token.ExpiresIn).ToString()
+                }
+            };
+
+            var result =
+                await _httpContextAccessor.HttpContext.AuthenticateAsync();
+
+            var properties = result.Properties;
+            properties.StoreTokens(authenticationToken);
+
+            await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                result.Principal, properties);
+
             return true;
         }
     }

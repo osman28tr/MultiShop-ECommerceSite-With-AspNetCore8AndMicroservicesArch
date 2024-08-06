@@ -36,6 +36,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
 builder.Services.AddSession();
 builder.Services.Configure<ClientSetting>(builder.Configuration.GetSection("ClientSettings"));
+builder.Services.Configure<ServiceApiSetting>(builder.Configuration.GetSection("ServiceApiSettings"));
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
