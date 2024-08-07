@@ -70,7 +70,7 @@ namespace MultiShop.MvcUI.Controllers
 			//	}
 			//}
             await _identityService.SignInAsync(loginDto);
-			return RedirectToAction("Index","Test");
+			return RedirectToAction("Index","User");
 		}
 	}
 }
