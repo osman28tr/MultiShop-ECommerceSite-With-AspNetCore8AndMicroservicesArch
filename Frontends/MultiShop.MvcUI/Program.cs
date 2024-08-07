@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using MultiShop.MvcUI.Handlers;
 using MultiShop.MvcUI.Services;
 using MultiShop.MvcUI.Services.Abstract;
+using MultiShop.MvcUI.Services.Repositories.CatalogServices.CategoryServices;
+using MultiShop.MvcUI.Services.Repositories.CatalogServices.CategoryServices.Abstract;
 using MultiShop.MvcUI.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -40,13 +42,28 @@ builder.Services.AddHttpClient<IUserService, UserService>(opt =>
 }).AddHttpMessageHandler<ResourcePasswordTokenHandler>();
 
 builder.Services.AddScoped<ResourcePasswordTokenHandler>();
+builder.Services.AddScoped<ClientCredentialTokenHandler>();
+
+builder.Services.AddHttpClient<IClientCredentialTokenService, ClientCredentialTokenService>();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
 builder.Services.AddSession();
 builder.Services.Configure<ClientSetting>(builder.Configuration.GetSection("ClientSettings"));
-builder.Services.Configure<ServiceApiSetting>(builder.Configuration.GetSection("ServiceApiSettings"));
+var serviceApiSettingValues = builder.Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSetting>();
+builder.Services.AddSingleton<ServiceApiSetting>(serviceApiSettingValues);
+
+serviceApiSettingValues.IdentityUrl = builder.Configuration["IdentityUrl"]!;
+
+builder.Services.AddHttpClient<ICategoryService, CategoryService>(opt =>
+{
+    opt.BaseAddress = new Uri($"{serviceApiSettingValues.OcelotUrl}/{serviceApiSettingValues.Catalog.Path}");
+}).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
+builder.Services.AddAccessTokenManagement();
+
 var app = builder.Build();
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

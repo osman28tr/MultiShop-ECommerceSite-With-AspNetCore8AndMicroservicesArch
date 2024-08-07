@@ -1,0 +1,29 @@
+﻿@model List<ResultCategoryDto>
+@{
+    Layout = null;
+}
+
+<br />
+<br />
+<div class="margin-left:100px">
+    <table>
+        <thead>
+        <tr>
+
+            <th>Id</th>
+            <th>Name</th>
+            <th>ImageUrl</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.ImageUrl</td>
+                </tr>                
+            }
+        </tbody>
+    </table>
+</div>
