@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using MultiShop.MvcUI.Extensions;
 using MultiShop.MvcUI.Handlers;
 using MultiShop.MvcUI.Services;
 using MultiShop.MvcUI.Services.Abstract;
@@ -32,35 +33,38 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         opt.SlidingExpiration = true;
     });
 
-builder.Services.AddHttpContextAccessor();
+//builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddScoped<ILoginService, LoginService>();
-builder.Services.AddScoped<IIdentityService, IdentityService>();
-builder.Services.AddHttpClient<IUserService, UserService>(opt =>
-{
-    opt.BaseAddress = new Uri(builder.Configuration["IdentityUrl"]!);
-}).AddHttpMessageHandler<ResourcePasswordTokenHandler>();
+//builder.Services.AddScoped<ILoginService, LoginService>();
+//builder.Services.AddScoped<IIdentityService, IdentityService>();
+//builder.Services.AddHttpClient<IUserService, UserService>(opt =>
+//{
+//    opt.BaseAddress = new Uri(builder.Configuration["IdentityUrl"]!);
+//}).AddHttpMessageHandler<ResourcePasswordTokenHandler>();
 
-builder.Services.AddScoped<ResourcePasswordTokenHandler>();
-builder.Services.AddScoped<ClientCredentialTokenHandler>();
+//builder.Services.AddScoped<ResourcePasswordTokenHandler>();
+//builder.Services.AddScoped<ClientCredentialTokenHandler>();
 
-builder.Services.AddHttpClient<IClientCredentialTokenService, ClientCredentialTokenService>();
+//builder.Services.AddHttpClient<IClientCredentialTokenService, ClientCredentialTokenService>();
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddHttpClient();
-builder.Services.AddSession();
-builder.Services.Configure<ClientSetting>(builder.Configuration.GetSection("ClientSettings"));
-var serviceApiSettingValues = builder.Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSetting>();
-builder.Services.AddSingleton<ServiceApiSetting>(serviceApiSettingValues);
 
-serviceApiSettingValues.IdentityUrl = builder.Configuration["IdentityUrl"]!;
+builder.Services.AddMultiShopUIServices(builder.Configuration);
 
-builder.Services.AddHttpClient<ICategoryService, CategoryService>(opt =>
-{
-    opt.BaseAddress = new Uri($"{serviceApiSettingValues.OcelotUrl}/{serviceApiSettingValues.Catalog.Path}");
-}).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+//builder.Services.AddHttpClient();
+//builder.Services.AddSession();
+//builder.Services.Configure<ClientSetting>(builder.Configuration.GetSection("ClientSettings"));
+//var serviceApiSettingValues = builder.Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSetting>();
+//builder.Services.AddSingleton<ServiceApiSetting>(serviceApiSettingValues);
 
-builder.Services.AddAccessTokenManagement();
+//serviceApiSettingValues.IdentityUrl = builder.Configuration["IdentityUrl"]!;
+
+//builder.Services.AddHttpClient<ICategoryService, CategoryService>(opt =>
+//{
+//    opt.BaseAddress = new Uri($"{serviceApiSettingValues.OcelotUrl}/{serviceApiSettingValues.Catalog.Path}");
+//}).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
+//builder.Services.AddAccessTokenManagement();
 
 var app = builder.Build();
 
