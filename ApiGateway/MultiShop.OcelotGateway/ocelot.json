@@ -13,11 +13,11 @@
       ],
       //Client tarafından bize gelen istekler
       "UpstreamPathTemplate": "/services/catalog/{everything}",
-      "UpstreamHttpMethod": [ "Get" ],
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
       "UpstreamScheme": "http",
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "OcelotAuthenticationScheme",
-        "AllowedScopes": [ "CatalogReadPermission" ]
+        "AllowedScopes": [ "CatalogFullPermission" ]
       }
     },
     //Discount Mikroservis

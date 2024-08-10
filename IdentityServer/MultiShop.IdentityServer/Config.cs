@@ -49,7 +49,7 @@ namespace MultiShop.IdentityServer
 				ClientName = "MultiShopMvc",
 				AllowedGrantTypes = GrantTypes.ClientCredentials,
 				ClientSecrets = {new Secret("multishopsecret".Sha256())},
-				AllowedScopes = { "CatalogReadPermission","CargoReadPermission","OcelotFullPermission","CommentReadPermission" }
+				AllowedScopes = { "CatalogFullPermission","CargoReadPermission","OcelotFullPermission","CommentReadPermission" }
 			},
 			new Client()
 			{

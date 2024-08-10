@@ -17,9 +17,9 @@ namespace MultiShop.MvcUI.Services.Repositories.CatalogServices.CategoryServices
             return await _httpClient.GetFromJsonAsync<List<ResultCategoryDto>>("categories");
         }
 
-        public async Task<GetByIdCategoryDto> GetByIdCategoryAsync(string categoryId)
+        public async Task<UpdateCategoryDto> GetByIdCategoryAsync(string categoryId)
         {
-            return await _httpClient.GetFromJsonAsync<GetByIdCategoryDto>($"categories/{categoryId}");
+            return await _httpClient.GetFromJsonAsync<UpdateCategoryDto>($"categories/{categoryId}");
         }
 
         public async Task AddAsync(CreateCategoryDto createCategoryDto)
