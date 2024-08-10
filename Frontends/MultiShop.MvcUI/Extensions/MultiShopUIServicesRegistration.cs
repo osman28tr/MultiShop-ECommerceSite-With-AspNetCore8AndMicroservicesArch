@@ -3,6 +3,8 @@ using MultiShop.MvcUI.Services;
 using MultiShop.MvcUI.Services.Abstract;
 using MultiShop.MvcUI.Services.Repositories.CatalogServices.CategoryServices;
 using MultiShop.MvcUI.Services.Repositories.CatalogServices.CategoryServices.Abstract;
+using MultiShop.MvcUI.Services.Repositories.CatalogServices.ProductServices;
+using MultiShop.MvcUI.Services.Repositories.CatalogServices.ProductServices.Abstract;
 using MultiShop.MvcUI.Settings;
 
 namespace MultiShop.MvcUI.Extensions
@@ -34,6 +36,11 @@ namespace MultiShop.MvcUI.Extensions
             serviceApiSettingValues.IdentityUrl = configuration["IdentityUrl"]!;
 
             services.AddHttpClient<ICategoryService, CategoryService>(opt =>
+            {
+                opt.BaseAddress = new Uri($"{serviceApiSettingValues.OcelotUrl}/{serviceApiSettingValues.Catalog.Path}");
+            }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
+            services.AddHttpClient<IProductService, ProductService>(opt =>
             {
                 opt.BaseAddress = new Uri($"{serviceApiSettingValues.OcelotUrl}/{serviceApiSettingValues.Catalog.Path}");
             }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
