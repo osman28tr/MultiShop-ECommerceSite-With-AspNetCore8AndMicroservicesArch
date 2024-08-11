@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using MultiShop.DtoLayer.CatalogDtos.CustomerDtos;
+using MultiShop.MvcUI.Services.Repositories.CatalogServices.CustomerServices.Abstract;
 using Newtonsoft.Json;
 
 namespace MultiShop.MvcUI.Areas.Admin.Controllers
@@ -9,94 +10,60 @@ namespace MultiShop.MvcUI.Areas.Admin.Controllers
     [Route("Admin/Customer")]
     public class CustomerController : Controller
     {
-        private readonly IHttpClientFactory _httpClientFactory;
-        private readonly HttpClient _httpClient;
-        private readonly string _catalogCustomerUrl;
-        public CustomerController(IHttpClientFactory httpClientFactory)
+        private readonly ICustomerService _customerService;
+        public CustomerController(ICustomerService customerService)
         {
-            _httpClientFactory = httpClientFactory;
-            _httpClient = _httpClientFactory.CreateClient();
-            IConfiguration Configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-            _catalogCustomerUrl = Configuration["CatalogAPI:CustomerUrl"]!;
+            _customerService = customerService;
         }
         [Route("Index")]
         public async Task<IActionResult> Index()
         {
-            ViewBag.v1 = "Anasayfa";
-            ViewBag.v2 = "Müşteriler";
-            ViewBag.v3 = "Müşteri Listesi";
-            ViewBag.v4 = "Müşteri İşlemleri";
-            var responseMessage = await _httpClient.GetAsync(_catalogCustomerUrl);
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultCustomerDto>>(jsonData);
-                return View(values);
-            }
-            return View();
+            ViewbagCustomer("Müşteri Listesi");
+            var values = await _customerService.GetAllAsync();
+            return View(values);
         }
         [HttpGet]
         [Route("Create")]
         public IActionResult Create()
         {
-            ViewBag.v1 = "Anasayfa";
-            ViewBag.v2 = "Müşteriler";
-            ViewBag.v3 = "Müşteri Girişi";
-            ViewBag.v4 = "Müşteri İşlemleri";
+            ViewbagCustomer("Müşteri Girişi");
             return View();
         }
         [HttpPost]
         [Route("Create")]
         public async Task<IActionResult> Create(CreateCustomerDto createCustomerDto)
         {
-            var jsonData = JsonConvert.SerializeObject(createCustomerDto);
-            StringContent stringContent = new(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await _httpClient.PostAsync(_catalogCustomerUrl, stringContent);
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                return RedirectToAction("Index", "Customer", new { area = "Admin" });
-            }
-            return View();
+            await _customerService.AddAsync(createCustomerDto);
+            return RedirectToAction("Index", "Customer", new { area = "Admin" });
         }
         [Route("Delete/{id}")]
         public async Task<IActionResult> Delete(string id)
         {
-            var responseMessage = await _httpClient.DeleteAsync(_catalogCustomerUrl + "/" + id);
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                return RedirectToAction("Index", "Customer", new { area = "Admin" });
-            }
-            return View();
+            await _customerService.DeleteAsync(id);
+            return RedirectToAction("Index", "Customer", new { area = "Admin" });
         }
 
         [Route("Update/{id}")]
         public async Task<IActionResult> Update(string id)
         {
-            ViewBag.v1 = "Anasayfa";
-            ViewBag.v2 = "Müşteriler";
-            ViewBag.v3 = "Müşteri Güncelleme Sayfası";
-            ViewBag.v4 = "Müşteri İşlemleri";
-            var responseMessage = await _httpClient.GetAsync(_catalogCustomerUrl + "/" + id);
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<UpdateCustomerDto>(jsonData);
-                return View(values);
-            }
-            return View();
+            ViewbagCustomer("Müşteri Güncelleme Sayfası");
+            var values = await _customerService.GetByIdAsync(id);
+            return View(values);
         }
         [HttpPost]
         [Route("Update/{id}")]
         public async Task<IActionResult> Update(UpdateCustomerDto updateCustomerDto)
         {
-            var jsonData = JsonConvert.SerializeObject(updateCustomerDto);
-            var stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await _httpClient.PutAsync(_catalogCustomerUrl, stringContent);
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                return RedirectToAction("Index", "Customer", new { area = "Admin" });
-            }
-            return View();
+            await _customerService.UpdateAsync(updateCustomerDto);
+            return RedirectToAction("Index", "Customer", new { area = "Admin" });
+        }
+
+        void ViewbagCustomer(string headPage)
+        {
+            ViewBag.v1 = "Anasayfa";
+            ViewBag.v2 = "Müşteriler";
+            ViewBag.v3 = headPage;
+            ViewBag.v4 = "Müşteri İşlemleri";
         }
     }
 }
