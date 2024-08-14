@@ -7,6 +7,7 @@ namespace MultiShop.MvcUI.Services.Repositories.CatalogServices.ProductServices.
         Task<List<ResultProductDto>> GetAllAsync();
         Task<UpdateProductDto> GetByIdProductAsync(string productId);
         Task<List<ResultProductWithCategoryDto>> GetListProductWithCategory();
+        Task<List<ResultProductDto>> GetListProductByCategory(string categoryId);
         Task AddAsync(CreateProductDto createProductDto);
         Task UpdateAsync(UpdateProductDto updateProductDto);
         Task DeleteAsync(string productId);

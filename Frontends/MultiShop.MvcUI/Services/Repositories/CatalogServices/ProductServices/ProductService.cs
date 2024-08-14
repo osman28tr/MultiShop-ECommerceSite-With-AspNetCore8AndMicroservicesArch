@@ -26,6 +26,11 @@ namespace MultiShop.MvcUI.Services.Repositories.CatalogServices.ProductServices
             return await _httpClient.GetFromJsonAsync<List<ResultProductWithCategoryDto>>($"products");
         }
 
+        public async Task<List<ResultProductDto>> GetListProductByCategory(string categoryId)
+        {
+            return await _httpClient.GetFromJsonAsync<List<ResultProductDto>>($"products/GetListByCategory/{categoryId}");
+        }
+
         public async Task AddAsync(CreateProductDto createProductDto)
         {
             await _httpClient.PostAsJsonAsync<CreateProductDto>("products", createProductDto);

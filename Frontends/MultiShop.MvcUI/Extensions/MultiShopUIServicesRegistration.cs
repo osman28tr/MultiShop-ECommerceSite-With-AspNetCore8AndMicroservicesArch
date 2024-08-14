@@ -13,10 +13,16 @@ using MultiShop.MvcUI.Services.Repositories.CatalogServices.FeatureSliderService
 using MultiShop.MvcUI.Services.Repositories.CatalogServices.FeatureSliderServices.Abstract;
 using MultiShop.MvcUI.Services.Repositories.CatalogServices.OfferDiscountServices;
 using MultiShop.MvcUI.Services.Repositories.CatalogServices.OfferDiscountServices.Abstract;
+using MultiShop.MvcUI.Services.Repositories.CatalogServices.ProductDetailDetailServices;
+using MultiShop.MvcUI.Services.Repositories.CatalogServices.ProductDetailServices.Abstract;
+using MultiShop.MvcUI.Services.Repositories.CatalogServices.ProductImageServices;
+using MultiShop.MvcUI.Services.Repositories.CatalogServices.ProductImageServices.Abstract;
 using MultiShop.MvcUI.Services.Repositories.CatalogServices.ProductServices;
 using MultiShop.MvcUI.Services.Repositories.CatalogServices.ProductServices.Abstract;
 using MultiShop.MvcUI.Services.Repositories.CatalogServices.SpecialOfferServices;
 using MultiShop.MvcUI.Services.Repositories.CatalogServices.SpecialOfferServices.Abstract;
+using MultiShop.MvcUI.Services.Repositories.CommentServices;
+using MultiShop.MvcUI.Services.Repositories.CommentServices.Abstract;
 using MultiShop.MvcUI.Settings;
 
 namespace MultiShop.MvcUI.Extensions
@@ -85,6 +91,21 @@ namespace MultiShop.MvcUI.Extensions
             services.AddHttpClient<IAboutService, AboutService>(opt =>
             {
                 opt.BaseAddress = new Uri($"{serviceApiSettingValues.OcelotUrl}/{serviceApiSettingValues.Catalog.Path}");
+            }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
+            services.AddHttpClient<IProductDetailService, ProductDetailService>(opt =>
+            {
+                opt.BaseAddress = new Uri($"{serviceApiSettingValues.OcelotUrl}/{serviceApiSettingValues.Catalog.Path}");
+            }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
+            services.AddHttpClient<IProductImageService, ProductImageService>(opt =>
+            {
+                opt.BaseAddress = new Uri($"{serviceApiSettingValues.OcelotUrl}/{serviceApiSettingValues.Catalog.Path}");
+            }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
+            services.AddHttpClient<IReviewService, ReviewService>(opt =>
+            {
+                opt.BaseAddress = new Uri($"{serviceApiSettingValues.OcelotUrl}/{serviceApiSettingValues.Comment.Path}");
             }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
 
             services.AddAccessTokenManagement();

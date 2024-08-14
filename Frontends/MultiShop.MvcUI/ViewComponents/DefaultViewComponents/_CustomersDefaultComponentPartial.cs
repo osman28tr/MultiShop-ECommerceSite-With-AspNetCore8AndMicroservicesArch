@@ -1,30 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MultiShop.DtoLayer.CatalogDtos.CustomerDtos;
+using MultiShop.MvcUI.Services.Repositories.CatalogServices.CustomerServices.Abstract;
 using Newtonsoft.Json;
 
 namespace MultiShop.MvcUI.ViewComponents.DefaultViewComponents
 {
     public class _CustomersDefaultComponentPartial : ViewComponent
     {
-        private readonly IHttpClientFactory _httpClientFactory;
-        private readonly HttpClient _httpClient;
-        private readonly string _catalogCustomerUrl;
-        public _CustomersDefaultComponentPartial(IHttpClientFactory httpClientFactory)
+        private readonly ICustomerService _customerService;
+        public _CustomersDefaultComponentPartial(ICustomerService customerService)
         {
-            _httpClientFactory = httpClientFactory;
-            _httpClient = _httpClientFactory.CreateClient();
-            IConfiguration Configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-            _catalogCustomerUrl = Configuration["CatalogAPI:CustomerUrl"]!;
+            _customerService = customerService;
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var responseMessage = await _httpClient.GetAsync(_catalogCustomerUrl);
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultCustomerDto>>(jsonData);
+            var values = await _customerService.GetAllAsync();
+            if (values != null)
                 return View(values);
-            }
             return View();
         }
     }

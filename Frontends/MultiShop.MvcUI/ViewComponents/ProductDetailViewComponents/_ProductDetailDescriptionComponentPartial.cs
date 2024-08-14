@@ -1,31 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MultiShop.DtoLayer.CatalogDtos.ProductDetailDtos;
 using MultiShop.DtoLayer.CatalogDtos.ProductImageDtos;
+using MultiShop.MvcUI.Services.Repositories.CatalogServices.ProductDetailServices.Abstract;
 using Newtonsoft.Json;
 
 namespace MultiShop.MvcUI.ViewComponents.ProductDetailViewComponents
 {
     public class _ProductDetailDescriptionComponentPartial : ViewComponent
     {
-        private readonly IHttpClientFactory _httpClientFactory;
-        private readonly HttpClient _httpClient;
-        private readonly string _catalogProductDetailUrl;
-        public _ProductDetailDescriptionComponentPartial(IHttpClientFactory httpClientFactory)
+        private readonly IProductDetailService _productDetailService;
+        public _ProductDetailDescriptionComponentPartial(IProductDetailService productDetailService)
         {
-            _httpClientFactory = httpClientFactory;
-            _httpClient = _httpClientFactory.CreateClient();
-            IConfiguration Configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-            _catalogProductDetailUrl = Configuration["CatalogAPI:ProductDetailUrl"]!;
+            _productDetailService = productDetailService;
         }
         public async Task<IViewComponentResult> InvokeAsync(string productId)
         {
-            var responseMessage = await _httpClient.GetAsync(_catalogProductDetailUrl + $"/GetByProduct/{productId}");
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<ResultProductDetailDto>(jsonData);
+            var values = await _productDetailService.GetByProductAsync(productId);
+            if (values != null)
                 return View(values);
-            }
             return View();
         }
     }
