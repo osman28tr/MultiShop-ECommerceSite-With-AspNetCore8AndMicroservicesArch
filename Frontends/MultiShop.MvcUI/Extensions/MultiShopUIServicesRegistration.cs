@@ -5,6 +5,8 @@ using MultiShop.MvcUI.Services.Repositories.CatalogServices.AboutServices;
 using MultiShop.MvcUI.Services.Repositories.CatalogServices.AboutServices.Abstract;
 using MultiShop.MvcUI.Services.Repositories.CatalogServices.CategoryServices;
 using MultiShop.MvcUI.Services.Repositories.CatalogServices.CategoryServices.Abstract;
+using MultiShop.MvcUI.Services.Repositories.CatalogServices.ContactServices;
+using MultiShop.MvcUI.Services.Repositories.CatalogServices.ContactServices.Abstract;
 using MultiShop.MvcUI.Services.Repositories.CatalogServices.CustomerServices;
 using MultiShop.MvcUI.Services.Repositories.CatalogServices.CustomerServices.Abstract;
 using MultiShop.MvcUI.Services.Repositories.CatalogServices.FeatureServices;
@@ -99,6 +101,11 @@ namespace MultiShop.MvcUI.Extensions
             }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
 
             services.AddHttpClient<IProductImageService, ProductImageService>(opt =>
+            {
+                opt.BaseAddress = new Uri($"{serviceApiSettingValues.OcelotUrl}/{serviceApiSettingValues.Catalog.Path}");
+            }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
+            services.AddHttpClient<IContactService, ContactService>(opt =>
             {
                 opt.BaseAddress = new Uri($"{serviceApiSettingValues.OcelotUrl}/{serviceApiSettingValues.Catalog.Path}");
             }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
