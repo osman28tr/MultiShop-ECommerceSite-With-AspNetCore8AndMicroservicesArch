@@ -1,32 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MultiShop.DtoLayer.CatalogDtos.ProductImageDtos;
 using MultiShop.DtoLayer.CommentDtos;
+using MultiShop.MvcUI.Services.Repositories.CommentServices.Abstract;
 using Newtonsoft.Json;
 
 namespace MultiShop.MvcUI.ViewComponents.ProductDetailViewComponents
 {
     public class _ProductDetailReviewComponentPartial : ViewComponent
     {
-        private readonly IHttpClientFactory _httpClientFactory;
-        private readonly HttpClient _httpClient;
-        private readonly string _commentUrl;
-        public _ProductDetailReviewComponentPartial(IHttpClientFactory httpClientFactory)
+        private readonly IReviewService _reviewService;
+        public _ProductDetailReviewComponentPartial(IReviewService reviewService)
         {
-            _httpClientFactory = httpClientFactory;
-            _httpClient = _httpClientFactory.CreateClient();
-            IConfiguration Configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-            _commentUrl = Configuration["CommentUrl"]!;
+            _reviewService = reviewService;
         }
         public async Task<IViewComponentResult> InvokeAsync(string productId)
         {
-            var responseMessage = await _httpClient.GetAsync(_commentUrl + $"/GetListByProduct/{productId}");
+            var values = await _reviewService.GetAllByProductAsync(productId);
             ViewBag.Id = productId;
-            if (responseMessage.IsSuccessStatusCode)
-            {
-                var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<ResultReviewDto>>(jsonData);
-                return View(values);
-            }
+            if (values != null)
+                return View(values.ToList());
             return View();
         }
     }
