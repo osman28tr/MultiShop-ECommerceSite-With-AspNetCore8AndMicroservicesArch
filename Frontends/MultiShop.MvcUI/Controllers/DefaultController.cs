@@ -6,7 +6,6 @@ namespace MultiShop.MvcUI.Controllers
     {
         public IActionResult Index()
         {
-	        var user = User.Claims;
             return View();
         }
     }

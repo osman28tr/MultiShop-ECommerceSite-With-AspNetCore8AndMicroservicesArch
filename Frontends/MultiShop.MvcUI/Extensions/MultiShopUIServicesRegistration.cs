@@ -1,6 +1,8 @@
 ﻿using MultiShop.MvcUI.Handlers;
 using MultiShop.MvcUI.Services;
 using MultiShop.MvcUI.Services.Abstract;
+using MultiShop.MvcUI.Services.Repositories.BasketServices;
+using MultiShop.MvcUI.Services.Repositories.BasketServices.Abstract;
 using MultiShop.MvcUI.Services.Repositories.CatalogServices.AboutServices;
 using MultiShop.MvcUI.Services.Repositories.CatalogServices.AboutServices.Abstract;
 using MultiShop.MvcUI.Services.Repositories.CatalogServices.CategoryServices;
@@ -114,6 +116,11 @@ namespace MultiShop.MvcUI.Extensions
             {
                 opt.BaseAddress = new Uri($"{serviceApiSettingValues.OcelotUrl}/{serviceApiSettingValues.Comment.Path}");
             }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
+            services.AddHttpClient<IBasketService, BasketService>(opt =>
+            {
+                opt.BaseAddress = new Uri($"{serviceApiSettingValues.OcelotUrl}/{serviceApiSettingValues.Basket.Path}");
+            }).AddHttpMessageHandler<ResourcePasswordTokenHandler>();
 
             services.AddAccessTokenManagement();
 
