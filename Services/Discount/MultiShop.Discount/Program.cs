@@ -20,7 +20,12 @@ builder.Services.AddDbContext<MultiShopDiscountContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MSSQL"));
 });
 builder.Services.AddScoped<MultiShopDiscountDapperContext>();
-builder.Services.AddScoped<IDiscountService, DiscountService>();
+var ocelotUrl = builder.Configuration["ServiceApiSettings:OcelotUrl"];
+var basketUrl = builder.Configuration["ServiceApiSettings:Basket:Path"];
+builder.Services.AddHttpClient<IDiscountService, DiscountService>(opt =>
+{
+    opt.BaseAddress = new Uri(ocelotUrl + "/" + basketUrl);
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

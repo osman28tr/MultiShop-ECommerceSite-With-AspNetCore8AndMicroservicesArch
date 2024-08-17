@@ -1,0 +1,11 @@
+﻿<form class="mb-30" asp-controller="Discount" asp-action="ApplyCode">
+    <div class="input-group">
+        <input type="text" class="form-control border-0 p-4" name="code" placeholder="Kupon kodu">
+        <div class="input-group-append">
+            <button class="btn btn-primary">Kupon Uygula</button>
+        </div>
+    </div>
+    <div class="alert alert-primary mt-3" role="alert">
+        @TempData["isAppliedCoupon"]
+    </div>
+</form>

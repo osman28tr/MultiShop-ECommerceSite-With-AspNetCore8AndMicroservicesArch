@@ -32,11 +32,31 @@ namespace MultiShop.Discount.Controllers
             return Ok(result);
         }
 
+        [HttpGet("GetRateByCode/{code}")]
+        public async Task<IActionResult> GetRateByCode(string code)
+        {
+            var result = await _discountService.GetRate(code);
+            if (result == 0)
+            {
+                return BadRequest("Kupon kodu aktif değil veya süresi dolmuş olabilir.");
+            }
+            return Ok(result);
+        }
         [HttpPost]
         public async Task<IActionResult> Create(CreateCouponDto createCouponDto)
         {
             await _discountService.AddAsync(createCouponDto);
             return Created();
+        }
+        [HttpPost("ApplyDiscountCoupon")]
+        public async Task<IActionResult> ApplyDiscountCoupon(ApplyCouponDto applyCouponDto)
+        {
+            var result = await _discountService.ApplyDiscountCoupon(applyCouponDto);
+            if (!result.Item1)
+            {
+                return BadRequest("Kupon uygulanamadı.");
+            }
+            return Ok(new { message = "Kupon başarıyla uygulandı", data = result.Item2 });
         }
 
         [HttpPut]

@@ -59,7 +59,7 @@
                 </tbody>
             </table>
         </div>
-        @await Component.InvokeAsync("_BasketCheckOutComponentPartial")
+        @await Component.InvokeAsync("_BasketCheckOutComponentPartial",new{totalPrice = Model.TotalPrice})
     </div>
 </div>
 <!-- Cart End -->
