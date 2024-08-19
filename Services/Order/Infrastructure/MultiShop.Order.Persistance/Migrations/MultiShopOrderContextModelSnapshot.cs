@@ -34,6 +34,10 @@ namespace MultiShop.Order.Persistance.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Detail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -42,11 +46,37 @@ namespace MultiShop.Order.Persistance.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ZipCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OrderId")
+                        .IsUnique();
 
                     b.ToTable("Addresses");
                 });
@@ -109,6 +139,17 @@ namespace MultiShop.Order.Persistance.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("MultiShop.Order.Domain.Entities.Address", b =>
+                {
+                    b.HasOne("MultiShop.Order.Domain.Entities.Ordering", "Order")
+                        .WithOne("Address")
+                        .HasForeignKey("MultiShop.Order.Domain.Entities.Address", "OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("MultiShop.Order.Domain.Entities.OrderDetail", b =>
                 {
                     b.HasOne("MultiShop.Order.Domain.Entities.Ordering", "Order")
@@ -122,6 +163,9 @@ namespace MultiShop.Order.Persistance.Migrations
 
             modelBuilder.Entity("MultiShop.Order.Domain.Entities.Ordering", b =>
                 {
+                    b.Navigation("Address")
+                        .IsRequired();
+
                     b.Navigation("OrderDetails");
                 });
 #pragma warning restore 612, 618

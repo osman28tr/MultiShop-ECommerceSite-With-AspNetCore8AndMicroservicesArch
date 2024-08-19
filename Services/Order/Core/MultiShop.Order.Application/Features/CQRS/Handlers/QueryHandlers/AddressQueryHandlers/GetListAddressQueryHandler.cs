@@ -22,7 +22,6 @@ namespace MultiShop.Order.Application.Features.CQRS.Handlers.QueryHandlers.Addre
             return values.Select(x => new GetAddressQueryResult
             {
                 Id = x.Id,
-                UserId = x.UserId,
                 District = x.District,
                 City = x.City,
                 Detail = x.Detail

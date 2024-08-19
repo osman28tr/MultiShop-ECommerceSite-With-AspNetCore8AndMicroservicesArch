@@ -23,7 +23,6 @@ namespace MultiShop.Order.Application.Features.CQRS.Handlers.QueryHandlers.Addre
             return new GetAddressByIdQueryResult
             {
                 Id = value.Id,
-                UserId = value.UserId,
                 District = value.District,
                 City = value.City,
                 Detail = value.Detail

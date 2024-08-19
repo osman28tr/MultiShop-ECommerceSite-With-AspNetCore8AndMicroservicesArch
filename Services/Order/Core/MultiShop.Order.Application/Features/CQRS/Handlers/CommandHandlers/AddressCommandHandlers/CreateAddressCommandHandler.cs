@@ -21,7 +21,6 @@ namespace MultiShop.Order.Application.Features.CQRS.Handlers.CommandHandlers.Add
         {
             var address = new Address
             {
-                UserId = request.UserId,
                 District = request.District,
                 City = request.City,
                 Detail = request.Detail

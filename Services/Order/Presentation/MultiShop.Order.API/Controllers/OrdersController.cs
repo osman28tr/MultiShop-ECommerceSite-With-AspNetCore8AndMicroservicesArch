@@ -33,7 +33,7 @@ namespace MultiShop.Order.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateOrderCommand command)
+        public async Task<IActionResult> Create(CreateOrderCommand command)
         {
             await _mediator.Send(command);
             return Created();
