@@ -117,6 +117,24 @@
         "AuthenticationProviderKey": "OcelotAuthenticationScheme",
         "AllowedScopes": [ "CommentFullPermission" ]
       }
+    },
+    //Payment Mikroservis
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5256
+        }
+      ],
+      "UpstreamPathTemplate": "/services/payment/{everything}",
+      "UpstreamHttpMethod": [ "Post" ],
+      "UpstreamScheme": "http",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "OcelotAuthenticationScheme",
+        "AllowedScopes": [ "PaymentFullPermission" ]
+      }
     }
   ],
   "GlobalConfiguration": {
