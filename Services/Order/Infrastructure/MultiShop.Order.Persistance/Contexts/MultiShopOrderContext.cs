@@ -17,5 +17,9 @@ namespace MultiShop.Order.Persistance.Contexts
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Ordering> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Ordering>().HasAlternateKey(x => x.OrderNumber);
+        }
     }
 }

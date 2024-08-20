@@ -1,6 +1,6 @@
 ﻿@{
     decimal totalPrice = ViewBag.TotalPrice;
-    totalPrice = totalPrice + (totalPrice * 10 / 100);
+    totalPrice = totalPrice + (totalPrice * 10M / 100M);
 }
 <div class="col-lg-4">
     @await Html.PartialAsync("~/Views/Discount/ApplyCode.cshtml")
@@ -43,7 +43,7 @@
                 <h5>Toplam</h5>
                 <h5>@totalPrice₺</h5>
             </div>
-            <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Ödemeye Geç</button>
+            <a class="btn btn-block btn-primary font-weight-bold my-3 py-3" asp-controller="Order" asp-action="Index" asp-route-totalPrice="@totalPrice.ToString()">Sipariş Ver</a>
         </div>
     </div>
 </div>

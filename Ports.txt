@@ -5,6 +5,7 @@ Services
 	-cargoAPI=>5253
 	-basketAPI=>5254
 	-commentAPI=>5255
+	-paymentAPI=>5256
 	-ocelotAPI=>5000
 
 identityserver=>5001

@@ -1,17 +1,138 @@
-﻿
+﻿@using MultiShop.DtoLayer.PaymentDtos
+@model CreateOrderDto
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_UILayout.cshtml";
 }
-
+@{
+    var basket = ViewBag.Basket as BasketDto;
+}
 <div class="container-fluid">
     <div class="row px-xl-5">
-        @await Component.InvokeAsync("_OrderBillingAddressComponentPartial")
-        <div class="col-lg-4">
-            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Sipariş Özeti</span></h5>
-            @await Component.InvokeAsync("_OrderCheckoutComponentPartial")
-            @await Component.InvokeAsync("_OrderPaymentComponentPartial")
-        </div>
+        <form method="post">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Sipariş Teslimat ve Fatura Adresiniz</span></h5>
+                        <div class="bg-light p-30 mb-5">
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label>İsminiz</label>
+                                    <input class="form-control" asp-for="OrderAddress.Name" type="text">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label>Soyisminiz</label>
+                                    <input class="form-control" asp-for="OrderAddress.Surname" type="text">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label>Email Adresiniz</label>
+                                    <input class="form-control" type="text" asp-for="OrderAddress.Email">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label>Telefon</label>
+                                    <input class="form-control" type="text" asp-for="OrderAddress.Phone">
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <label>Adres</label>
+                                    <textarea class="form-control" asp-for="OrderAddress.Detail" placeholder="Adres bilginiz" rows="3"></textarea>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label>Ülke</label>
+                                    <select class="custom-select" asp-for="OrderAddress.Country">
+                                        <option selected>United States</option>
+                                        <option>Türkiye</option>
+                                        <option>İngiltere</option>
+                                        <option>İspanya</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label>Şehir</label>
+                                    <input class="form-control" type="text" asp-for="OrderAddress.City" >
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label>İlçe</label>
+                                    <input class="form-control" type="text" asp-for="OrderAddress.District">
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label>Eyalet</label>
+                                    <input class="form-control" type="text" asp-for="OrderAddress.State" >
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label>ZIP Code</label>
+                                    <input class="form-control" asp-for="OrderAddress.ZipCode" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Sipariş Özeti</span></h5>
+                        <div class="bg-light p-30 mb-5">
+                            <div class="border-bottom">
+                                <h6 class="mb-3">Products</h6>
+                                @if (basket != null)
+                                {
+                                    @foreach (var item in basket.BasketItems)
+                                    {
+                                        <div class="d-flex justify-content-between">
+                                            <p>@item.ProductName (@item.Quantity)</p>
+                                            <p>@item.Price₺</p>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                            <div class="border-bottom pt-3 pb-2">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <h6>Sipariş Ücreti</h6>
+                                    <h6>@basket?.TotalPrice₺</h6>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="font-weight-medium">KDV</h6>
+                                    <h6 class="font-weight-medium">%10</h6>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="font-weight-medium">Kargo Ücreti</h6>
+                                    <h6 class="font-weight-medium">30₺</h6>
+                                </div>
+                            </div>
+                            <div class="pt-2">
+                                <div class="d-flex justify-content-between mt-2">
+                                    <h5>Genel Toplam</h5>
+                                    <h5>@(ViewBag.TotalPrice + 30M)</h5>
+                                </div>
+                                <div class="d-flex justify-content-between mt-2">
+                                    <h5 hidden>Total Price</h5>
+                                    <input type="text" asp-for="TotalPrice" value="@(ViewBag.TotalPrice + 30M)" hidden/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-5">
+                            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Ödeme Yöntemini Seçiniz</span></h5>
+                            <div class="bg-light p-30">
+                                <div class="form-group">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" asp-for="PaymentType" value="PayPal" id="paypal">
+                                        <label class="custom-control-label" for="paypal">Paypal</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" asp-for="PaymentType" value="DirectCheck" id="directcheck">
+                                        <label class="custom-control-label" for="directcheck">Direct Check</label>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" asp-for="PaymentType" value="Card" id="banktransfer">
+                                        <label class="custom-control-label" for="banktransfer">Bank Transfer</label>
+                                    </div>
+                                </div>
+                                <a class="btn btn-block btn-primary font-weight-bold py-3">Ödeme</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 

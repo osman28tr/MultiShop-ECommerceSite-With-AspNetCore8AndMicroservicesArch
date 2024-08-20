@@ -29,6 +29,10 @@ using MultiShop.MvcUI.Services.Repositories.CommentServices;
 using MultiShop.MvcUI.Services.Repositories.CommentServices.Abstract;
 using MultiShop.MvcUI.Services.Repositories.DiscountServices;
 using MultiShop.MvcUI.Services.Repositories.DiscountServices.Abstract;
+using MultiShop.MvcUI.Services.Repositories.OrderServices;
+using MultiShop.MvcUI.Services.Repositories.OrderServices.Abstract;
+using MultiShop.MvcUI.Services.Repositories.PaymentServices;
+using MultiShop.MvcUI.Services.Repositories.PaymentServices.Abstract;
 using MultiShop.MvcUI.Settings;
 
 namespace MultiShop.MvcUI.Extensions
@@ -127,6 +131,16 @@ namespace MultiShop.MvcUI.Extensions
             services.AddHttpClient<IDiscountService, DiscountService>(opt =>
             {
                 opt.BaseAddress = new Uri($"{serviceApiSettingValues.OcelotUrl}/{serviceApiSettingValues.Discount.Path}");
+            }).AddHttpMessageHandler<ResourcePasswordTokenHandler>();
+
+            services.AddHttpClient<IOrderService, OrderService>(opt =>
+            {
+                opt.BaseAddress = new Uri($"{serviceApiSettingValues.OcelotUrl}/{serviceApiSettingValues.Order.Path}");
+            }).AddHttpMessageHandler<ResourcePasswordTokenHandler>();
+
+            services.AddHttpClient<IPaymentService, PaymentService>(opt =>
+            {
+                opt.BaseAddress = new Uri($"{serviceApiSettingValues.OcelotUrl}/{serviceApiSettingValues.Payment.Path}");
             }).AddHttpMessageHandler<ResourcePasswordTokenHandler>();
 
             services.AddAccessTokenManagement();

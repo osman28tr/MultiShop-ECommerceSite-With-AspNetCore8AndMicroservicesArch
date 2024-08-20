@@ -12,7 +12,7 @@ using MultiShop.Order.Persistance.Contexts;
 namespace MultiShop.Order.Persistance.Migrations
 {
     [DbContext(typeof(MultiShopOrderContext))]
-    [Migration("20240819090009_init")]
+    [Migration("20240819114002_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -65,7 +65,6 @@ namespace MultiShop.Order.Persistance.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("State")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Surname")
@@ -130,6 +129,10 @@ namespace MultiShop.Order.Persistance.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("OrderNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
 
@@ -138,6 +141,8 @@ namespace MultiShop.Order.Persistance.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasAlternateKey("OrderNumber");
 
                     b.ToTable("Orders");
                 });

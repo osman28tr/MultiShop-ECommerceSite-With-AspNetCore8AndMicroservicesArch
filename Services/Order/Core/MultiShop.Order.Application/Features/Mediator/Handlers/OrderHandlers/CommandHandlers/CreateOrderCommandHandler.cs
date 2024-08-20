@@ -22,7 +22,17 @@ namespace MultiShop.Order.Application.Features.Mediator.Handlers.OrderHandlers.C
         }
         public async Task Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
-            var order = _mapper.Map<Ordering>(request);
+            var order = new Ordering()
+            {
+                Date = request.Date,
+                UserId = request.UserId,
+                TotalPrice = request.TotalPrice,
+                Address = _mapper.Map<Address>(request.OrderAddress)
+            };
+            request.OrderDetails.ForEach(x => order.OrderDetails.Add(_mapper.Map<OrderDetail>(x)));
+            Random rnd = new Random();
+            order.OrderNumber = rnd.Next(1000000, 9999999).ToString();
+            order.Date = DateTime.Now;
             await _orderRepository.AddAsync(order);
         }
     }
